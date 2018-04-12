@@ -1,0 +1,371 @@
+{
+  "id": null,
+  "player": {
+    "originTileId": 45,
+    "goalTileId": 67,
+    "originDirection": "south"
+  },
+  "tiles": {
+    "1": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "2": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "3": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "4": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "5": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "6": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "7": {
+      "firstLayer": "grass",
+      "secondLayer": "wall"
+    },
+    "8": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "9": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "10": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "11": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "12": {
+      "firstLayer": "grass",
+      "secondLayer": "wall"
+    },
+    "13": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "14": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "15": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "16": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "17": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "18": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "19": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "20": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "21": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "22": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "23": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "24": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "25": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "26": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "27": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "28": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "29": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "30": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "31": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "32": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "33": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "34": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "35": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "36": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "37": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "38": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "39": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "40": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "41": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "42": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "43": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "44": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "45": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "46": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "47": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "48": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "49": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "50": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "51": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "52": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "53": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "54": {
+      "firstLayer": "grass",
+      "secondLayer": "wall"
+    },
+    "55": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "56": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "57": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "58": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "59": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "60": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "61": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "62": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "63": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "64": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "65": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "66": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "67": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "68": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "69": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+
+    "70": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "71": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "72": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "73": {
+      "firstLayer": "grass",
+      "secondLayer": "wall"
+    },
+    "74": {
+      "firstLayer": "grass",
+      "secondLayer": "wall"
+    },
+    "75": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "76": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "77": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "78": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "79": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "80": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "81": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "82": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "83": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "84": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "85": {
+      "firstLayer": "water",
+      "secondLayer": null
+    },
+    "86": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "87": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "88": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "89": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    },
+    "90": {
+      "firstLayer": "grass",
+      "secondLayer": null
+    }
+  }
+}

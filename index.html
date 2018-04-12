@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no" />
+  <title>wooly-game</title>
+</head>
+<body>
+<div id="app"></div>
+<div id="logs"></div>
+<button class="uniq">Générer</button>
+
+<script src="dist/build.js"></script>
+<script>
+  document.querySelector('.uniq').addEventListener('click', function (e) {
+    console.log(Math.random().toString(36).substr(2, 9));
+  });
+</script>
+</body>
+</html>
