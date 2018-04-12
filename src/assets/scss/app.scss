@@ -1,8 +1,17 @@
-#app {
+body {
+  margin: 0;
+  padding: 0;
+}
 
+#app {
   canvas {
     border: 1px dashed gray;
   }
 }
 
-
+#myVideo {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  display: none;
+}

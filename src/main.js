@@ -86,6 +86,11 @@ PIXI.loader
   .add("catanim3", "./src/assets/images/catanim3.png")
   .add("catanim4", "./src/assets/images/catanim4.png")
   .add("map", "./src/assets/maps/map01.json")
+    .add("tree", "./src/assets/images/tree.png")
+    .add("wall", "./src/assets/images/wall.png")
+    .add("stone1", "./src/assets/images/stone1.png")
+    .add("stone2", "./src/assets/images/stone2.png")
+    .add("bush", "./src/assets/images/bush.png")
   .load((loader, resources) => {
 
     // console.log(resources["map"].data.player);
