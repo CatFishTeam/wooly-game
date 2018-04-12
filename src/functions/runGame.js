@@ -100,31 +100,42 @@ function moveForward() {
   cat.play();
   switch (catDirection) {
     case 'south':
-      if (isOnMap(cat.x + 32, cat.y + 16) > 0) {
+        if (isOnMap(cat.x + 32, cat.y + 16) > 0 && isAccessible(cat.x + 32, cat.y + 16) > 0) {
         moveTo(cat.x, cat.y, cat.x + 32, cat.y + 16);
       } else
         stopGame();
       break;
     case 'west':
-      if (isOnMap(cat.x - 32, cat.y + 16) > 0) {
+        if (isOnMap(cat.x - 32, cat.y + 16) > 0 && isAccessible(cat.x - 32, cat.y + 16) > 0) {
         moveTo(cat.x, cat.y, cat.x - 32, cat.y + 16);
       } else
         stopGame();
       break;
     case 'north':
-      if (isOnMap(cat.x - 32, cat.y - 16) > 0) {
+        if (isOnMap(cat.x - 32, cat.y - 16) > 0 && isAccessible(cat.x - 32, cat.y - 16) > 0) {
         moveTo(cat.x, cat.y, cat.x - 32, cat.y - 16);
       }
       else
         stopGame();
       break;
     case 'east':
-      if (isOnMap(cat.x + 32, cat.y - 16) > 0) {
+        if (isOnMap(cat.x + 32, cat.y - 16) > 0 && isAccessible(cat.x + 32, cat.y - 16) > 0) {
         moveTo(cat.x, cat.y, cat.x + 32, cat.y - 16);
       } else
         stopGame();
       break;
     default: break;
+  }
+
+  if (isDeadly(cat.x, cat.y) > 0) {
+      console.log("creve")
+      stopGame();
+      let vid = document.getElementById("myVideo");
+      vid.style.display = 'block';
+
+      vid.play();
+
+      setTimeout(function(){ vid.style.display = 'none'; }, 8000);
   }
 
 }
@@ -150,11 +161,15 @@ function moveTo(originCatX, originCatY, x, y) {
 }
 
 function isOnMap(x, y) {
-  return tiles.filter((tile, i) => JSON.stringify(tile.location) === JSON.stringify({id: (i+1), x: x, y: y})).length;
+    return tiles.filter((tile, i) => JSON.stringify(tile.location) === JSON.stringify({id: (i+1), x: x, y: y})).length;
 }
 
 function isDeadly(x, y) {
-  return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile === 'water')).length;
+    return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile === "water")).length;
+}
+
+function isAccessible(x, y) {
+    return tiles.filter((tile, i) => ((tile.infos.x === x && tile.infos.y === y) && (tile.infos.object === null || (tile.infos.object !== null && tile.infos.object.isAccessible)))).length;
 }
 
 function turnLeft() {

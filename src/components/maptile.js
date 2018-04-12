@@ -1,64 +1,64 @@
 class MapTile extends PIXI.Sprite {
+    constructor(texture = null, id = '', originX = 0, originY = 0, location, infos, type = 'MapTile') {
+        super();
+        this.texture = texture;
+        this.anchor.set(0.5, 0.5);
+        this.x = originX;
+        this.y = originY;
+        this._id = id;
+        this._location = location;
+        this._infos = infos;
+        this.height = 40;
+        this.width = 64;
+        this._type = type;
+    }
 
-  constructor(texture = null, id = '', originX = 0, originY = 0, location, infos, type = 'MapTile') {
-    super();
-    this.texture = texture;
-    this.anchor.set(0.5, 0.5);
-    this.x = originX;
-    this.y = originY;
-    this._id = id;
-    this._location = location;
-    this._infos = infos;
-    this._type = type;
-  }
+    get id() {
+        return this._id;
+    }
 
-  get id() {
-    return this._id;
-  }
+    set id(value) {
+        this._id = value;
+    }
 
-  set id(value) {
-    this._id = value;
-  }
+    get originY() {
+        return this._originY;
+    }
 
-  get originY() {
-    return this._originY;
-  }
+    set originY(value) {
+        this._originY = value;
+    }
+    get originX() {
+        return this._originX;
+    }
 
-  set originY(value) {
-    this._originY = value;
-  }
-  get originX() {
-    return this._originX;
-  }
+    set originX(value) {
+        this._originX = value;
+    }
 
-  set originX(value) {
-    this._originX = value;
-  }
+    get location() {
+        return this._location;
+    }
 
-  get location() {
-    return this._location;
-  }
+    set location(value) {
+        this._location = value;
+    }
 
-  set location(value) {
-    this._location = value;
-  }
+    get infos() {
+        return this._infos;
+    }
 
-  get infos() {
-    return this._infos;
-  }
+    set infos(value) {
+        this._infos = value;
+    }
 
-  set infos(value) {
-    this._infos = value;
-  }
+    get type() {
+        return this._type;
+    }
 
-  get type() {
-    return this._type;
-  }
-
-  set type(value) {
-    this._type = value;
-  }
-
+    set type(value) {
+        this._type = value;
+    }
 }
 
 module.exports = MapTile;

@@ -24,7 +24,11 @@
     },
     "5": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "6": {
       "firstLayer": "grass",
@@ -32,7 +36,7 @@
     },
     "7": {
       "firstLayer": "grass",
-      "secondLayer": "wall"
+      "secondLayer": null
     },
     "8": {
       "firstLayer": "grass",
@@ -40,7 +44,11 @@
     },
     "9": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "10": {
       "firstLayer": "grass",
@@ -52,7 +60,7 @@
     },
     "12": {
       "firstLayer": "grass",
-      "secondLayer": "wall"
+      "secondLayer": null
     },
     "13": {
       "firstLayer": "grass",
@@ -60,7 +68,11 @@
     },
     "14": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "15": {
       "firstLayer": "grass",
@@ -72,7 +84,11 @@
     },
     "17": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "stone2",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "18": {
       "firstLayer": "grass",
@@ -84,7 +100,11 @@
     },
     "20": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "21": {
       "firstLayer": "grass",
@@ -112,7 +132,11 @@
     },
     "27": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "28": {
       "firstLayer": "grass",
@@ -144,7 +168,11 @@
     },
     "35": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "36": {
       "firstLayer": "grass",
@@ -176,7 +204,11 @@
     },
     "43": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "44": {
       "firstLayer": "grass",
@@ -188,7 +220,11 @@
     },
     "46": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "tree",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "47": {
       "firstLayer": "grass",
@@ -196,7 +232,11 @@
     },
     "48": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "bush",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "49": {
       "firstLayer": "grass",
@@ -208,11 +248,19 @@
     },
     "51": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "stone1",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "52": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "53": {
       "firstLayer": "grass",
@@ -220,7 +268,7 @@
     },
     "54": {
       "firstLayer": "grass",
-      "secondLayer": "wall"
+      "secondLayer": null
     },
     "55": {
       "firstLayer": "grass",
@@ -235,7 +283,7 @@
       "secondLayer": null
     },
     "58": {
-      "firstLayer": "grass",
+      "firstLayer": "water",
       "secondLayer": null
     },
     "59": {
@@ -297,11 +345,11 @@
     },
     "73": {
       "firstLayer": "grass",
-      "secondLayer": "wall"
+      "secondLayer": null
     },
     "74": {
       "firstLayer": "grass",
-      "secondLayer": "wall"
+      "secondLayer": null
     },
     "75": {
       "firstLayer": "water",
@@ -357,15 +405,27 @@
     },
     "88": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "tree",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "89": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "tree",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "90": {
       "firstLayer": "grass",
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "tree",
+        "accessible": false,
+        "deadly": false
+      }
     }
   }
 }
