@@ -7,18 +7,15 @@ let tooltips = main.tooltips;
 let checkActions = main.checkActions;
 
 module.exports = function onDragStart(event) {
+
+  this.picked = true;
   // Crée une copie de l'action qu'on déplace,
   // pour qu'on puisse en ajouter autant qu'on veut
   let duplicate = new Sprite(this.name, this.name, this.originX, this.originY);
   duplicate.x = this.originX;
 
-  // Si c'est une action
-  if (this.type === 'action') {
-    actions.addChild(duplicate);
-  }
-  // Sinon, un déclencheur
-  else {
-    triggerActions.addChild(duplicate);
+  if (this.type === 'trigger') {
+    duplicate.type = 'trigger';
   }
 
   duplicate.interactive = true;
@@ -27,6 +24,7 @@ module.exports = function onDragStart(event) {
 
   // Redéfinit le tooltip pour la copie
   switch (duplicate.name) {
+    // Actions
     case 'forward':
       duplicate.hasTooltip = true;
       duplicate.tooltip = 'Fait avancer le chat d\'une case dans sa direction actuelle';
@@ -47,7 +45,23 @@ module.exports = function onDragStart(event) {
       duplicate.tooltip = 'Attend (sert à rien pour l\'instant - ptet à virer)';
       tooltips.addChild(duplicate.tooltip);
       break;
+
+    // Triggers
+    case 'trigger-block-if':
+      duplicate.hasTooltip = true;
+      duplicate.tooltip = 'Exécute l\'action liée si la condition est vraie';
+      tooltips.addChild(duplicate.tooltip);
+      break;
     default: break;
+  }
+
+  // Si c'est une action
+  if (this.type === 'action') {
+    actions.addChild(duplicate);
+  }
+  // Sinon, un déclencheur
+  else {
+    triggerActions.addChild(duplicate);
   }
 
   checkActions();

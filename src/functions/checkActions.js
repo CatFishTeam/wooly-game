@@ -21,7 +21,7 @@ module.exports = function checkActions() {
       .on('pointerout', onOut)
       .on('pointerdown', onDragStart)
       .on('pointerup', onDragEnd)
-      .on('pointerupoutside', onDragEnd)
+      // .on('pointerupoutside', onDragEnd)
       .on('pointermove', onDragMove);
   }
 
@@ -34,7 +34,7 @@ module.exports = function checkActions() {
       .on('pointerout', onOut)
       .on('pointerdown', onDragStart)
       .on('pointerup', onDragEnd)
-      .on('pointerupoutside', onDragEnd)
+      // .on('pointerupoutside', onDragEnd)
       .on('pointermove', onDragMove);
   }
 };

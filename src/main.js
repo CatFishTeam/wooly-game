@@ -26,7 +26,6 @@ const Trigger = require('./components/trigger');
 const Sprite = require('./components/sprite');
 
 // Functions
-// const checkActions = require('./functions/checkActions');
 
 // Map du niveau (JSON)
 const map = require('./assets/maps/map01');
@@ -102,7 +101,6 @@ PIXI.loader
       catframes.push(PIXI.Texture.fromFrame('./src/assets/images/catanim'+ i +'.png'));
     }
 
-    console.log(catframes);
     let cat = new PIXI.extras.AnimatedSprite(catframes);
     cat.animationSpeed = 0.1;
 
