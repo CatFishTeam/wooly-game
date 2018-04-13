@@ -98,6 +98,19 @@ function updateCounter() {
 
 function moveForward() {
   cat.play();
+
+    if (isDeadly(cat.x, cat.y) > 0) {
+        console.log("creve");
+        let vid = document.getElementById("myVideo");
+        vid.style.display = 'block';
+        stopGame();
+
+        vid.play();
+
+        setTimeout(function(){ vid.style.display = 'none'; }, 8000);
+        return;
+    }
+
   switch (catDirection) {
     case 'south':
         if (isOnMap(cat.x + 32, cat.y + 16) > 0 && isAccessible(cat.x + 32, cat.y + 16) > 0) {
@@ -127,17 +140,6 @@ function moveForward() {
     default: break;
   }
 
-  if (isDeadly(cat.x, cat.y) > 0) {
-      console.log("creve")
-      stopGame();
-      let vid = document.getElementById("myVideo");
-      vid.style.display = 'block';
-
-      vid.play();
-
-      setTimeout(function(){ vid.style.display = 'none'; }, 8000);
-  }
-
 }
 
 function moveTo(originCatX, originCatY, x, y) {
@@ -165,11 +167,11 @@ function isOnMap(x, y) {
 }
 
 function isDeadly(x, y) {
-    return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile === "water")).length;
+    return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile.deadly === true)).length;
 }
 
 function isAccessible(x, y) {
-    return tiles.filter((tile, i) => ((tile.infos.x === x && tile.infos.y === y) && (tile.infos.object === null || (tile.infos.object !== null && tile.infos.object.isAccessible)))).length;
+    return tiles.filter((tile, i) => ((tile.infos.x === x && tile.infos.y === y) && (tile.infos.object === null || (tile.infos.object !== null && tile.infos.object.accessible === true)))).length;
 }
 
 function turnLeft() {

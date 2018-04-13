@@ -92,6 +92,8 @@ PIXI.loader
     .add("stone1", "./src/assets/images/stone1.png")
     .add("stone2", "./src/assets/images/stone2.png")
     .add("bush", "./src/assets/images/bush.png")
+    .add("grass", "./src/assets/images/grass.png")
+    .add("water", "./src/assets/images/water.png")
   .load((loader, resources) => {
 
     // console.log(resources["map"].data.player);

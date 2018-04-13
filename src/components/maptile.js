@@ -1,7 +1,6 @@
 class MapTile extends PIXI.Sprite {
     constructor(texture = null, id = '', originX = 0, originY = 0, location, infos, type = 'MapTile') {
-        super();
-        this.texture = texture;
+        super(PIXI.loader.resources[texture].texture);
         this.anchor.set(0.5, 0.5);
         this.x = originX;
         this.y = originY;
