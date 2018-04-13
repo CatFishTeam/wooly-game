@@ -130,12 +130,6 @@ function moveForward() {
   if (isDeadly(cat.x, cat.y) > 0) {
       console.log("creve")
       stopGame();
-      let vid = document.getElementById("myVideo");
-      vid.style.display = 'block';
-
-      vid.play();
-
-      setTimeout(function(){ vid.style.display = 'none'; }, 8000);
   }
 
 }
