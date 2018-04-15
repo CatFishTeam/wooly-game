@@ -4,9 +4,13 @@ let main = require('../main');
 let actions = main.actions;
 let triggerActions = main.triggerActions;
 let tooltips = main.tooltips;
-let checkActions = main.checkActions;
 
-module.exports = function onDragStart(event) {
+module.exports = function (event) {
+  const onHover = require('./onHover');
+  const onOut = require('./onOut');
+  const onDragStart = require('./onDragStart');
+  const onDragEnd = require('./onDragEnd');
+  const onDragMove = require('./onDragMove');
 
   this.picked = true;
   // Crée une copie de l'action qu'on déplace,
@@ -20,6 +24,13 @@ module.exports = function onDragStart(event) {
 
   duplicate.interactive = true;
   duplicate.buttonMode = true;
+  duplicate
+    .on('pointerover', onHover)
+    .on('pointerout', onOut)
+    .on('pointerdown', onDragStart)
+    .on('pointerup', onDragEnd)
+    .on('pointerupoutside', onDragEnd)
+    .on('pointermove', onDragMove);
   duplicate.anchor.set(0.5, 0.5);
 
   // Redéfinit le tooltip pour la copie
@@ -64,7 +75,6 @@ module.exports = function onDragStart(event) {
     triggerActions.addChild(duplicate);
   }
 
-  checkActions();
   this.data = event.data;
   this.alpha = 0.8;
   this.dragging = true;

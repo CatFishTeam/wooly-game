@@ -17,7 +17,6 @@ class Tooltip extends PIXI.Sprite {
     this._text.style.wordWrap = true;
     this._text.style.wordWrapWidth = this.texture.width - 16;
     this.addChild(this._text);
-    this._text = text;
   }
 
   changeSprite(texture) {
@@ -60,7 +59,8 @@ class Tooltip extends PIXI.Sprite {
   }
 
   set text(value) {
-    this._text = value;
+    this._text.text = value;
+    this.addChild(this._text);
   }
 
 }
