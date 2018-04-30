@@ -1,5 +1,5 @@
 class MapObject extends PIXI.Sprite {
-    constructor(texture = null, id = '', originX = 0, originY = 0, location, infos) {
+    constructor(texture = null, id = '', originX = 0, originY = 0, location, infos, type = 'MapObject') {
         super(PIXI.loader.resources[texture].texture);
         this.x = originX;
         this.y = originY;
@@ -8,6 +8,7 @@ class MapObject extends PIXI.Sprite {
         this._infos = infos;
         this.width = 64;
         this.height = this.texture.height / 10;
+        this._type = type;
         this.anchor.set(0.5, 0.75);
     }
 

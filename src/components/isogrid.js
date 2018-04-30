@@ -45,8 +45,7 @@ class IsoGrid {
 
                 let floor = undefined;
 
-                floorTexture = PIXI.Texture.fromImage('./src/assets/images/' + map.tiles[tileId].firstLayer + '.png');
-                floor = new MapTile(floorTexture, tileId, x, y, location, infos);
+                floor = new MapTile(map.tiles[tileId].firstLayer.texture, tileId, x, y, location, infos);
                 floor.interactive = true;
                 floor.hitArea = new PIXI.Polygon(new PIXI.Point(-360, 0), new PIXI.Point(0, -200), new PIXI.Point(360, 0), new PIXI.Point(0, 200));
                 floor
@@ -59,7 +58,6 @@ class IsoGrid {
                 if (map.tiles[tileId].secondLayer !== null) {
                     let objet = undefined;
 
-                    objetTexture = PIXI.Texture.fromImage('./src/assets/images/' + map.tiles[tileId].secondLayer.texture + '.png');
                     objet = new MapObject(map.tiles[tileId].secondLayer.texture, tileId, x, y, location, infos);
                     this.container.addChild(objet);
                 }
@@ -93,8 +91,7 @@ class IsoGrid {
                     object: map.tiles[tileId].secondLayer
                 };
 
-                floorTexture = PIXI.Texture.fromImage('./src/assets/images/' + map.tiles[tileId].firstLayer + '.png');
-                floor = new MapTile(floorTexture, tileId, x, y, location, infos);
+                floor = new MapTile(map.tiles[tileId].firstLayer.texture, tileId, x, y, location, infos);
                 floor.interactive = true;
                 floor.hitArea = new PIXI.Polygon(new PIXI.Point(-360, 0), new PIXI.Point(0, -200), new PIXI.Point(360, 0), new PIXI.Point(0, 200));
                 floor
@@ -107,8 +104,8 @@ class IsoGrid {
                 if (map.tiles[tileId].secondLayer !== null) {
                     let objet = undefined;
 
-                    objetTexture = PIXI.Texture.fromImage('./src/assets/images/' + map.tiles[tileId].secondLayer.texture + '.png');
                     objet = new MapObject(map.tiles[tileId].secondLayer.texture, tileId, x, y, location, infos);
+
                     this.container.addChild(objet);
                 }
 
