@@ -554,7 +554,8 @@
       "firstLayer": {
         "texture" : "grass",
         "accessible": true,
-        "deadly": false
+        "deadly": false,
+        "end": true
       },
       "secondLayer": null
     },
