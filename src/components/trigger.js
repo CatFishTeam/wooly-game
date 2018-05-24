@@ -28,6 +28,7 @@ class Trigger extends PIXI.Sprite {
   }
 
   set originX(value) {
+    this.x = value;
     this._originX = value;
   }
 
@@ -36,6 +37,7 @@ class Trigger extends PIXI.Sprite {
   }
 
   set originY(value) {
+    this.y = value;
     this._originY = value;
   }
 
@@ -45,6 +47,14 @@ class Trigger extends PIXI.Sprite {
 
   set type(newType) {
     this._type = newType;
+  }
+
+  get texture() {
+    return this._texture;
+  }
+
+  set texture(value) {
+    this._texture = PIXI.Texture.from(value);
   }
 
   get container() {

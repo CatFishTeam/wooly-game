@@ -1,6 +1,6 @@
 /**
-* Ce module est appelé quand le joueur clique sur le bouton Play dans un niveau
-* */
+ * Ce module est appelé quand le joueur clique sur le bouton Play dans un niveau
+ * */
 let main = require('../main');
 let grid = main.grid;
 let stage = main.stage;
@@ -8,9 +8,12 @@ let tiles = stage.children.filter(child => child.type === 'MapTile');
 let app = main.app;
 let steps = main.steps;
 let stepsObject = main.stepsObject;
+let triggers = main.triggers;
+let triggersObject = main.triggersObject;
 let cat = main.cat;
 let gameInstance = main.gameInstance;
 let animInstance = undefined;
+
 
 // Données JSON de la map
 const map = require('../assets/maps/map01');
@@ -18,6 +21,10 @@ const map = require('../assets/maps/map01');
 let cnt = 0;
 let timeOut = null;
 let catDirection = map.player.originDirection;
+let DIRECTION = {
+  x: 0,
+  y: 0
+};
 let stopped = false;
 
 module.exports = function runGame(action = 'run') {
@@ -57,20 +64,27 @@ function readSteps() {
     step.tint = 0xffffff;
   });
 
-  steps.children[cnt].tint = 0xd7e5b0;
+  triggers.children.filter(trigger => {
+    trigger.tint = 0xffffff;
+  });
 
-  switch (stepsObject[cnt].type) {
-    case 'empty': break;
-    case 'forward':
-      moveForward();
-      break;
-    case 'turnleft':
-      turnLeft();
-      break;
-    case 'turnright':
-      turnRight();
-      break;
-    default: break;
+  steps.children[cnt].tint = 0xd7e5b0;
+  triggers.children[cnt].tint = 0xd7e5b0;
+
+  if (checkTrigger(cnt)) {
+    switch (stepsObject[cnt].type) {
+      case 'empty': break;
+      case 'forward':
+        moveForward();
+        break;
+      case 'turnleft':
+        turnLeft();
+        break;
+      case 'turnright':
+        turnRight();
+        break;
+      default: break;
+    }
   }
 
   if (isOnMap(cat.x, cat.y) > 0) {
@@ -79,16 +93,68 @@ function readSteps() {
 
     if (stepsObject[cnt].type !== 'empty' && !stopped) {
       timeOut = setTimeout(() => {
-        if (!gameInstance)
+        if (!gameInstance) {
           gameInstance = requestAnimationFrame(readSteps);
+        }
       }, 50);
     } else if (stepsObject[cnt].type === 'empty' && !stopped) {
-      if (!gameInstance)
+      if (!gameInstance) {
         gameInstance = requestAnimationFrame(readSteps);
+      }
     }
 
   }
 
+}
+
+function checkTrigger(cnt) {
+  checkDirection();
+  // S'il n'y a pas de trigger pour cette action : on skip
+  if (triggersObject[cnt].condition === null) {
+    return true;
+  } else {
+    let subject = triggersObject[cnt].condition.subject;
+    let verb = triggersObject[cnt].condition.verb;
+    let complement = triggersObject[cnt].condition.complement;
+
+    if (verb === 'on') {
+      let currentTile = whatTile(cat.x, cat.y);
+      return (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
+    }
+
+    if (verb === 'before') {
+      let currentTile = whatTile(cat.x + DIRECTION.x, cat.y + DIRECTION.y);
+      return (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
+    }
+
+    if (verb === 'after') {
+      let currentTile = whatTile(cat.x - DIRECTION.x, cat.y - DIRECTION.y);
+      return (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
+    }
+    return true;
+  }
+}
+
+function checkDirection() {
+  switch(catDirection) {
+    case 'south':
+      DIRECTION.x = 32;
+      DIRECTION.y = 16;
+      break;
+      case 'west':
+      DIRECTION.x = -32;
+      DIRECTION.y = 16;
+      break;
+      case 'north':
+      DIRECTION.x = -32;
+      DIRECTION.y = -16;
+      break;
+      case 'east':
+      DIRECTION.x = 32;
+      DIRECTION.y = -16;
+      break;
+    default: break;
+  }
 }
 
 function updateCounter() {
@@ -100,26 +166,26 @@ function moveForward() {
   cat.play();
   switch (catDirection) {
     case 'south':
-        if (isOnMap(cat.x + 32, cat.y + 16) > 0 && isAccessible(cat.x + 32, cat.y + 16) > 0) {
+      if (isOnMap(cat.x + 32, cat.y + 16) > 0 && isAccessible(cat.x + 32, cat.y + 16) > 0) {
         moveTo(cat.x, cat.y, cat.x + 32, cat.y + 16);
       } else
         stopGame();
       break;
     case 'west':
-        if (isOnMap(cat.x - 32, cat.y + 16) > 0 && isAccessible(cat.x - 32, cat.y + 16) > 0) {
+      if (isOnMap(cat.x - 32, cat.y + 16) > 0 && isAccessible(cat.x - 32, cat.y + 16) > 0) {
         moveTo(cat.x, cat.y, cat.x - 32, cat.y + 16);
       } else
         stopGame();
       break;
     case 'north':
-        if (isOnMap(cat.x - 32, cat.y - 16) > 0 && isAccessible(cat.x - 32, cat.y - 16) > 0) {
+      if (isOnMap(cat.x - 32, cat.y - 16) > 0 && isAccessible(cat.x - 32, cat.y - 16) > 0) {
         moveTo(cat.x, cat.y, cat.x - 32, cat.y - 16);
       }
       else
         stopGame();
       break;
     case 'east':
-        if (isOnMap(cat.x + 32, cat.y - 16) > 0 && isAccessible(cat.x + 32, cat.y - 16) > 0) {
+      if (isOnMap(cat.x + 32, cat.y - 16) > 0 && isAccessible(cat.x + 32, cat.y - 16) > 0) {
         moveTo(cat.x, cat.y, cat.x + 32, cat.y - 16);
       } else
         stopGame();
@@ -128,8 +194,8 @@ function moveForward() {
   }
 
   if (isDeadly(cat.x, cat.y) > 0) {
-      console.log("creve")
-      stopGame();
+    console.log("creve")
+    stopGame();
   }
 
 }
@@ -154,16 +220,20 @@ function moveTo(originCatX, originCatY, x, y) {
   }
 }
 
+function whatTile(x, y) {
+  return tiles.filter((tile, i) => (tile.location.x === x && tile.location.y === y))[0];
+}
+
 function isOnMap(x, y) {
-    return tiles.filter((tile, i) => JSON.stringify(tile.location) === JSON.stringify({id: (i+1), x: x, y: y})).length;
+  return tiles.filter((tile, i) => JSON.stringify(tile.location) === JSON.stringify({id: (i+1), x: x, y: y})).length;
 }
 
 function isDeadly(x, y) {
-    return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile === "water")).length;
+  return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile === "water")).length;
 }
 
 function isAccessible(x, y) {
-    return tiles.filter((tile, i) => ((tile.infos.x === x && tile.infos.y === y) && (tile.infos.object === null || (tile.infos.object !== null && tile.infos.object.isAccessible)))).length;
+  return tiles.filter((tile, i) => ((tile.infos.x === x && tile.infos.y === y) && (tile.infos.object === null || (tile.infos.object !== null && tile.infos.object.isAccessible)))).length;
 }
 
 function turnLeft() {
@@ -211,6 +281,9 @@ function stopGame() {
   gameInstance = undefined;
   steps.children.filter(step => {
     step.tint = 0xffffff;
+  });
+  triggers.children.filter(trigger => {
+    trigger.tint = 0xffffff;
   });
   console.log('game stopped');
 }

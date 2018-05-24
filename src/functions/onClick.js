@@ -1,16 +1,8 @@
-module.exports = function onClick(e) {
-  console.log(e.data);
-
-  e.stopped = true;
-  e.stopPropagation();
-  console.log(e);
+module.exports = function onClick() {
 
   const checkPopup = require('./checkPopup');
   let main = require('../main');
   let triggersObject = main.triggersObject;
-  console.log(triggersObject);
-  console.log(this);
-  console.log(this._events);
 
   if (this.format && this.format === 'trigger') {
     let popup = document.querySelector('.trigger-choice');
@@ -28,24 +20,56 @@ module.exports = function onClick(e) {
       this.highlight = true;
       popup.style.visibility = 'hidden';
 
-      console.log("in1");
 
       // On set le message du tooltip selon le déclencheur utilisé
       switch (this.type) {
         case 'trigger-block-if':
-          this.tooltip.text = "Déclencheur \"SI\" : choisissez une option ci-dessous";
-          popup.innerHTML = `
-L'alcool c'est :
-          <select>
-            <option value="grass">de l'herbe</option>
-            <option value="water" selected>de l'eau</option>
-            <option value="sand">du sable</option>
+          if (this.condition === null) {
+            this.tooltip.text = "Déclencheur \"SI\" : choisissez une option ci-dessous";
+          }
+          popup.innerHTML = `Si :
+          <select class="subject">
+            <option value="cat" data-text="le chat">le chat</option>
+          </select>
+          <select class="verb">
+            <option value="on" data-text="est sur">est sur</option>
+            <option value="before" data-text="fait face à">fait face à</option>
+            <option value="after" data-text="vient de passer">vient de passer</option>
+          </select>
+          <select class="complement">
+            <option value="grass" data-text="une case herbe">une case "herbe"</option>
+            <option value="water" data-text="une case eau">une case "eau"</option>
+            <option value="sand" data-text="une case sable">une case "sable"</option>
+            <option value="wall" data-text="un objet mur">un objet "mur"</option>
           </select>
           <button id="validTrigger">OK</button>
           `;
           displayPopup = true;
-          console.log("in2");
           break;
+        case 'trigger-block-while':
+          if (this.condition === null) {
+            this.tooltip.text = "Déclencheur \"PENDANT\" : choisissez une option ci-dessous";
+          }
+          popup.innerHTML = `Pendant :
+          <select class="subject">
+            <option value="cat" data-text="le chat">le chat</option>
+          </select>
+          <select class="verb">
+            <option value="on" data-text="est sur">est sur</option>
+            <option value="before" data-text="fait face à">fait face à</option>
+            <option value="after" data-text="vient de passer">vient de passer</option>
+          </select>
+          <select class="complement">
+            <option value="grass" data-text="une case herbe">une case "herbe"</option>
+            <option value="water" data-text="une case eau">une case "eau"</option>
+            <option value="sand" data-text="une case sable">une case "sable"</option>
+            <option value="wall" data-text="un objet mur">un objet "mur"</option>
+          </select>
+          <button id="validTrigger">OK</button>
+          `;
+          displayPopup = true;
+          break;
+
         default:
           this.tooltip.text = "Rien pour l'instant";
           break;
@@ -54,7 +78,6 @@ L'alcool c'est :
       this.tint = 0xfad390;
       this.tooltip.show();
       if (displayPopup) {
-        console.log("in3");
         popup.style.visibility = 'visible';
         checkPopup(this);
       }
@@ -64,7 +87,6 @@ L'alcool c'est :
       this.highlight = false;
       this.tint = 0xffffff;
       this.tooltip.hide();
-      console.log("shouldnot");
       popup.style.visibility = 'hidden';
     }
   }
