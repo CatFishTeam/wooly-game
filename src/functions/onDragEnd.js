@@ -39,6 +39,14 @@ module.exports = function onDragEnd() {
             theStep = trigger;
             theIndex = index;
             onStep = true;
+            console.log(trigger.originY);
+            if (trigger.originY === 0) {
+              trigger.originY -= 32;
+              trigger.texture = "settrigger-top";
+            } else {
+              trigger.originY += 1;
+              trigger.texture = "settrigger-bottom";
+            }
             break;
           }
         }
@@ -50,7 +58,16 @@ module.exports = function onDragEnd() {
     if (this.onStep) {
       previousStep = this.currentStep;
       if (this.type === 'action') stepsObject[previousStep].type = 'empty';
-      else triggersObject[previousStep].type = 'empty';
+      else {
+        triggersObject[previousStep].type = 'empty';
+        if (triggers.children[previousStep].originY === -32) {
+          triggers.children[previousStep].originY += 32;
+          triggers.children[previousStep].texture = "trigger-top";
+        } else {
+          triggers.children[previousStep].originY -= 1;
+          triggers.children[previousStep].texture = "trigger-bottom";
+        }
+      }
     }
 
     if (onStep) {
@@ -65,7 +82,10 @@ module.exports = function onDragEnd() {
         triggersObject[theIndex].type = this.name;
         theStep.alpha = 1;
         this.x = theStep.x;
-        this.y = theStep.y + 8;
+        if (triggers.children[theIndex].originY === -32)
+          this.y = theStep.y + 40;
+        else
+          this.y = theStep.y + 8;
       }
 
       this.onStep = true;

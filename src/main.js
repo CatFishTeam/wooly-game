@@ -82,6 +82,9 @@ PIXI.loader
   .add("trigger-top", "./src/assets/images/trigger-top.png")
   .add("trigger-bottom", "./src/assets/images/trigger-bottom.png")
   .add("trigger-block-if", "./src/assets/images/trigger-block-if.png")
+  .add("trigger-block-while", "./src/assets/images/trigger-block-while.png")
+  .add("settrigger-top", "./src/assets/images/settrigger-top.png")
+  .add("settrigger-bottom", "./src/assets/images/settrigger-bottom.png")
   // Cat character sprites
   .add("catanim1", "./src/assets/images/catanim1.png")
   .add("catanim2", "./src/assets/images/catanim2.png")
@@ -140,6 +143,7 @@ PIXI.loader
     let wait;
 // Déclencheurs
     let ifTrigger;
+    let whileTrigger;
 
 // Zone des tooltips
     let tooltips = new PIXI.Container();
@@ -253,24 +257,35 @@ PIXI.loader
     // Icones de déclencheurs
     ifTrigger = new Sprite('trigger-block-if', 'trigger-block-if');
     ifTrigger.x = 0;
+    ifTrigger.originX = 0;
     ifTrigger.type = 'trigger';
     ifTrigger.hasTooltip = true;
-    ifTrigger.tooltip = 'Exécute l\'action liée si la condition est vraie';
+    ifTrigger.tooltip = '"Si" : Exécute l\'action si la condition est vraie';
     tooltips.addChild(ifTrigger.tooltip);
 
     triggerActions.addChild(ifTrigger);
 
+    whileTrigger = new Sprite('trigger-block-while', 'trigger-block-while');
+    whileTrigger.x = 32;
+    whileTrigger.originX = 32;
+    whileTrigger.type = 'trigger';
+    whileTrigger.hasTooltip = true;
+    whileTrigger.tooltip = '"Pendant" : Exécute l\'action pendant un certain temps';
+    tooltips.addChild(whileTrigger.tooltip);
+
+    triggerActions.addChild(whileTrigger);
+
     // On positionne notre barre d'actions en bas et centré dans le menu,
     // et la barre des déclencheurs
     actions.x = (actions.parent.width / 2) - (actions.width / 2);
-    actions.y = actions.parent.height - 192;
+    actions.y = actions.parent.height - 160;
 
     triggerActions.x = (triggerActions.parent.width / 2) - (triggerActions.width / 2);
-    triggerActions.y = triggerActions.parent.height - 160;
+    triggerActions.y = triggerActions.parent.height - 128;
 
     // On positionne la zone où les tooltips s'afficheront
     tooltips.x = 0;
-    tooltips.y = tooltips.parent.height - 128;
+    tooltips.y = tooltips.parent.height - 96;
 
 
     let mapText = new PIXI.Text('map');
@@ -293,7 +308,6 @@ PIXI.loader
       const onDragEnd = require('./functions/onDragEnd');
       const onDragMove = require('./functions/onDragMove');
       const onClick = require('./functions/onClick');
-      const onUnclick = require('./functions/onUnclick');
 
       // Boutons d'actions
       for (let action of actions.children) {
@@ -327,14 +341,8 @@ PIXI.loader
       triggersObject.filter(triggerObject => {
         triggerObject.interactive = true;
         triggerObject.buttonMode = true;
-        if (!triggerObject.highlight) {
-          triggerObject.on('click', onClick);
-        } else {
-          triggerObject.on('click', onUnclick);
-        }
+        triggerObject.on('click', onClick);
       });
-
-      console.log(triggersObject);
 
     }
 
@@ -352,8 +360,7 @@ PIXI.loader
       triggersObject,
       tooltips,
       cat,
-      gameInstance,
-      checkActions
+      gameInstance
     };
 
     // Quand on clique sur le bouton Play du menu
