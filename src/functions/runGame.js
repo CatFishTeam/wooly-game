@@ -260,6 +260,25 @@ function updateCounter() {
 
 function moveForward() {
   cat.play();
+  
+  if (isDeadly(cat.x, cat.y) > 0) {
+      console.log("creve");
+      let vid = document.getElementById("myVideo");
+      vid.style.display = 'block';
+      stopGame();
+
+      vid.play();
+
+      setTimeout(function(){ vid.style.display = 'none'; }, 8000);
+      return;
+  }
+
+  if (isEndGame(cat.x, cat.y) > 0) {
+      alert("Win");
+      stopGame();
+      return;
+  }
+  
   switch (catDirection) {
     case 'south':
       if (isOnMap(cat.x + 32, cat.y + 16) > 0 && isAccessible(cat.x + 32, cat.y + 16) > 0) {
@@ -328,6 +347,10 @@ function isDeadly(x, y) {
 
 function isAccessible(x, y) {
   return tiles.filter((tile, i) => ((tile.infos.x === x && tile.infos.y === y) && (tile.infos.object === null || (tile.infos.object !== null && tile.infos.object.accessible === true)))).length;
+}
+
+function isEndGame(x, y) {
+  return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile.end === true)).length;
 }
 
 function turnLeft() {
