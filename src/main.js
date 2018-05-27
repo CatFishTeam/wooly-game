@@ -26,7 +26,6 @@ const Trigger = require('./components/trigger');
 const Sprite = require('./components/sprite');
 
 // Functions
-// const checkActions = require('./functions/checkActions');
 
 // Map du niveau (JSON)
 const map = require('./assets/maps/map01');
@@ -68,6 +67,7 @@ container.addChild(stage);
 container.addChild(menu);
 
 
+
 /**
  * Chargement des sprites/images
  */
@@ -82,19 +82,30 @@ PIXI.loader
   .add("trigger-top", "./src/assets/images/trigger-top.png")
   .add("trigger-bottom", "./src/assets/images/trigger-bottom.png")
   .add("trigger-block-if", "./src/assets/images/trigger-block-if.png")
+  .add("trigger-block-while", "./src/assets/images/trigger-block-while.png")
+  .add("trigger-block-until", "./src/assets/images/trigger-block-until.png")
+  .add("settrigger-top", "./src/assets/images/settrigger-top.png")
+  .add("settrigger-bottom", "./src/assets/images/settrigger-bottom.png")
+  // Cat character sprites
   .add("catanim1", "./src/assets/images/catanim1.png")
   .add("catanim2", "./src/assets/images/catanim2.png")
   .add("catanim3", "./src/assets/images/catanim3.png")
   .add("catanim4", "./src/assets/images/catanim4.png")
+  // JSON map data
   .add("map", "./src/assets/maps/map01.json")
-    .add("tree", "./src/assets/images/tree.png")
-    .add("wall", "./src/assets/images/wall.png")
-    .add("stone1", "./src/assets/images/stone1.png")
-    .add("stone2", "./src/assets/images/stone2.png")
-    .add("bush", "./src/assets/images/bush.png")
-    .add("grass", "./src/assets/images/grass.png")
-    .add("water", "./src/assets/images/water.png")
+  // Map textures (tiles & objets)
+  .add("grass", "./src/assets/images/grass.png")
+  .add("water", "./src/assets/images/water.png")
+  .add("tree", "./src/assets/images/tree.png")
+  .add("wall", "./src/assets/images/wall.png")
+  .add("stone1", "./src/assets/images/stone1.png")
+  .add("stone2", "./src/assets/images/stone2.png")
+  .add("bush", "./src/assets/images/bush.png")
   .load((loader, resources) => {
+
+    const onHover = require('./functions/onHover');
+    const onOut = require('./functions/onOut');
+
 
     // console.log(resources["map"].data.player);
 
@@ -104,7 +115,6 @@ PIXI.loader
       catframes.push(PIXI.Texture.fromFrame('./src/assets/images/catanim'+ i +'.png'));
     }
 
-    console.log(catframes);
     let cat = new PIXI.extras.AnimatedSprite(catframes);
     cat.animationSpeed = 0.1;
 
@@ -114,11 +124,8 @@ PIXI.loader
 // Dessine la grille sur la map (voir ./components/grid.js)
 // let grid = new Grid(20, 14, 32, 32, stage);
 // grid.draw();
-    let textures = {
-      floor: 'grass'
-    };
 
-    let grid = new IsoGrid(10, 14, 64, 32, stage, textures);
+    let grid = new IsoGrid(10, 14, 64, 32, stage);
 
 
     /**
@@ -137,6 +144,12 @@ PIXI.loader
     let wait;
 // Déclencheurs
     let ifTrigger;
+    let whileTrigger;
+    let untilTrigger;
+
+// Zone des tooltips
+    let tooltips = new PIXI.Container();
+    menu.addChild(tooltips);
 
 // Barre des steps que le chat fera (dans le menu en haut)
     let stepsArea = new PIXI.Container();
@@ -158,7 +171,11 @@ PIXI.loader
           trigger = new Trigger(x * 32, y, 'empty', triggers, 'trigger-top');
         else
           trigger = new Trigger(x * 32, (y * 32) + 80, 'empty', triggers, 'trigger-bottom');
+        trigger.tooltip = "Rien pour l'instant";
+        tooltips.addChild(trigger.tooltip);
+
         step.draw();
+
         stepsObject.push(step);
         triggersObject.push(trigger);
       }
@@ -171,10 +188,6 @@ PIXI.loader
     triggersObject.pop();
 
     menu.setChildIndex(stepsArea, 0);
-
-// Zone des tooltips
-    let tooltips = new PIXI.Container();
-    menu.addChild(tooltips);
 
     let gameInstance = undefined;
 
@@ -196,8 +209,6 @@ PIXI.loader
     /**
      * Menu
      */
-    const onHover = require('./functions/onHover');
-    const onOut = require('./functions/onOut');
 
     // On positionne les steps en haut et centré dans le menu
     stepsArea.x = (stepsArea.parent.width / 2) - (stepsArea.width / 2);
@@ -248,24 +259,45 @@ PIXI.loader
     // Icones de déclencheurs
     ifTrigger = new Sprite('trigger-block-if', 'trigger-block-if');
     ifTrigger.x = 0;
+    ifTrigger.originX = 0;
     ifTrigger.type = 'trigger';
     ifTrigger.hasTooltip = true;
-    ifTrigger.tooltip = 'Exécute l\'action liée si la condition est vraie';
+    ifTrigger.tooltip = '"Si" : Exécute l\'action si la condition est vraie';
     tooltips.addChild(ifTrigger.tooltip);
 
     triggerActions.addChild(ifTrigger);
 
+    whileTrigger = new Sprite('trigger-block-while', 'trigger-block-while');
+    whileTrigger.x = 32;
+    whileTrigger.originX = 32;
+    whileTrigger.type = 'trigger';
+    whileTrigger.hasTooltip = true;
+    whileTrigger.tooltip = '"Pendant" : Exécute l\'action pendant un certain temps';
+    tooltips.addChild(whileTrigger.tooltip);
+
+    triggerActions.addChild(whileTrigger);
+
+    untilTrigger = new Sprite('trigger-block-until', 'trigger-block-until');
+    untilTrigger.x = 64;
+    untilTrigger.originX = 64;
+    untilTrigger.type = 'trigger';
+    untilTrigger.hasTooltip = true;
+    untilTrigger.tooltip = '"Tant que" : Exécute l\'action tant que la condition est vraie';
+    tooltips.addChild(untilTrigger.tooltip);
+
+    triggerActions.addChild(untilTrigger);
+
     // On positionne notre barre d'actions en bas et centré dans le menu,
     // et la barre des déclencheurs
     actions.x = (actions.parent.width / 2) - (actions.width / 2);
-    actions.y = actions.parent.height - 192;
+    actions.y = actions.parent.height - 160;
 
     triggerActions.x = (triggerActions.parent.width / 2) - (triggerActions.width / 2);
-    triggerActions.y = triggerActions.parent.height - 160;
+    triggerActions.y = triggerActions.parent.height - 128;
 
     // On positionne la zone où les tooltips s'afficheront
     tooltips.x = 0;
-    tooltips.y = tooltips.parent.height - 128;
+    tooltips.y = tooltips.parent.height - 96;
 
 
     let mapText = new PIXI.Text('map');
@@ -278,7 +310,6 @@ PIXI.loader
     menuText.y = menu.height;
     menu.addChild(menuText);
 
-
     function checkActions() {
 
       // Pour chacun des boutons d'action, on les rend interactif pour pouvoir les cliquer,
@@ -288,7 +319,9 @@ PIXI.loader
       const onDragStart = require('./functions/onDragStart');
       const onDragEnd = require('./functions/onDragEnd');
       const onDragMove = require('./functions/onDragMove');
+      const onClick = require('./functions/onClick');
 
+      // Boutons d'actions
       for (let action of actions.children) {
         action.interactive = true;
         action.buttonMode = true;
@@ -302,6 +335,7 @@ PIXI.loader
           .on('pointermove', onDragMove);
       }
 
+      // Boutons de déclencheurs
       for (let trigger of triggerActions.children) {
         trigger.interactive = true;
         trigger.buttonMode = true;
@@ -314,6 +348,14 @@ PIXI.loader
           .on('pointerupoutside', onDragEnd)
           .on('pointermove', onDragMove);
       }
+
+    //   Cases de déclencheurs
+      triggersObject.filter(triggerObject => {
+        triggerObject.interactive = true;
+        triggerObject.buttonMode = true;
+        triggerObject.on('click', onClick);
+      });
+
     }
 
     module.exports = {
@@ -330,8 +372,7 @@ PIXI.loader
       triggersObject,
       tooltips,
       cat,
-      gameInstance,
-      checkActions
+      gameInstance
     };
 
     // Quand on clique sur le bouton Play du menu
@@ -375,7 +416,11 @@ PIXI.loader
   });
 
 
-// Affichage des logs :
+/**
+ * Code JS, en dehors de PIXI / du <canvas>
+ */
+
+// Affichage des logs (sous le canvas) :
 let logsDiv = document.querySelector('#logs');
 function writeLogs() {
   logsDiv.innerHTML = '';
@@ -386,3 +431,4 @@ function writeLogs() {
     logsDiv.appendChild(logHtml);
   }
 }
+
