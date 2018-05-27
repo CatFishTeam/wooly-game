@@ -63,12 +63,17 @@ module.exports = function (event) {
       duplicate.tooltip = '"Si" : Exécute l\'action liée si la condition est vraie';
       tooltips.addChild(duplicate.tooltip);
       break;
-
     case 'trigger-block-while':
       duplicate.hasTooltip = true;
       duplicate.tooltip = '"Pendant" : Exécute l\'action pendant un certain temps';
       tooltips.addChild(duplicate.tooltip);
       break;
+    case 'trigger-block-until':
+      duplicate.hasTooltip = true;
+      duplicate.tooltip = '"Tant que" : Exécute l\'action tant que la condition est vraie';
+      tooltips.addChild(duplicate.tooltip);
+      break;
+
     default: break;
   }
 

@@ -39,7 +39,6 @@ module.exports = function onDragEnd() {
             theStep = trigger;
             theIndex = index;
             onStep = true;
-            console.log(trigger.originY);
             if (trigger.originY === 0) {
               trigger.originY -= 32;
               trigger.texture = "settrigger-top";
