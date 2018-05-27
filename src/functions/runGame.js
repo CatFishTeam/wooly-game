@@ -14,8 +14,6 @@ let cat = main.cat;
 let gameInstance = main.gameInstance;
 let animInstance = undefined;
 
-console.log(tiles);
-
 // Données JSON de la map
 const map = require('../assets/maps/map01');
 
