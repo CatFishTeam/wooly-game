@@ -83,6 +83,7 @@ PIXI.loader
   .add("trigger-bottom", "./src/assets/images/trigger-bottom.png")
   .add("trigger-block-if", "./src/assets/images/trigger-block-if.png")
   .add("trigger-block-while", "./src/assets/images/trigger-block-while.png")
+  .add("trigger-block-until", "./src/assets/images/trigger-block-until.png")
   .add("settrigger-top", "./src/assets/images/settrigger-top.png")
   .add("settrigger-bottom", "./src/assets/images/settrigger-bottom.png")
   // Cat character sprites
@@ -144,6 +145,7 @@ PIXI.loader
 // Déclencheurs
     let ifTrigger;
     let whileTrigger;
+    let untilTrigger;
 
 // Zone des tooltips
     let tooltips = new PIXI.Container();
@@ -274,6 +276,16 @@ PIXI.loader
     tooltips.addChild(whileTrigger.tooltip);
 
     triggerActions.addChild(whileTrigger);
+
+    untilTrigger = new Sprite('trigger-block-until', 'trigger-block-until');
+    untilTrigger.x = 64;
+    untilTrigger.originX = 64;
+    untilTrigger.type = 'trigger';
+    untilTrigger.hasTooltip = true;
+    untilTrigger.tooltip = '"Tant que" : Exécute l\'action tant que la condition est vraie';
+    tooltips.addChild(untilTrigger.tooltip);
+
+    triggerActions.addChild(untilTrigger);
 
     // On positionne notre barre d'actions en bas et centré dans le menu,
     // et la barre des déclencheurs

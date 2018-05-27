@@ -275,8 +275,12 @@
       "secondLayer": null
     },
     "56": {
-      "firstLayer": "grass",
-      "secondLayer": null
+      "firstLayer": "water",
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "57": {
       "firstLayer": "grass",

@@ -19,6 +19,8 @@ let animInstance = undefined;
 const map = require('../assets/maps/map01');
 
 let cnt = 0;
+let triggerWhileCounter = 0;
+let preventCntProgress = false;
 let timeOut = null;
 let catDirection = map.player.originDirection;
 let DIRECTION = {
@@ -40,6 +42,8 @@ module.exports = function runGame(action = 'run') {
   else {
     stopped = false;
     cnt = 0;
+    triggerWhileCounter = 0;
+    preventCntProgress = false;
     catDirection = map.player.originDirection;
 
     console.log("Game running");
@@ -71,7 +75,7 @@ function readSteps() {
   steps.children[cnt].tint = 0xd7e5b0;
   triggers.children[cnt].tint = 0xd7e5b0;
 
-  if (checkTrigger(cnt)) {
+  if (checkTrigger()) {
     switch (stepsObject[cnt].type) {
       case 'empty': break;
       case 'forward':
@@ -107,31 +111,124 @@ function readSteps() {
 
 }
 
-function checkTrigger(cnt) {
+function checkTrigger() {
   checkDirection();
   // S'il n'y a pas de trigger pour cette action : on skip
   if (triggersObject[cnt].condition === null) {
     return true;
   } else {
-    let subject = triggersObject[cnt].condition.subject;
-    let verb = triggersObject[cnt].condition.verb;
-    let complement = triggersObject[cnt].condition.complement;
+    // Trigger 'Si' :
+    if (triggersObject[cnt].type === 'trigger-block-if') {
+      let subject = triggersObject[cnt].condition.subject;
+      let verb = triggersObject[cnt].condition.verb;
+      let complement = triggersObject[cnt].condition.complement;
+      let currentTile;
 
-    if (verb === 'on') {
-      let currentTile = whatTile(cat.x, cat.y);
-      return (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
+      if (verb === 'on' || verb === 'not-on') { currentTile = whatTile(cat.x, cat.y); }
+
+      if (verb === 'before' || verb === 'not-before') { currentTile = whatTile(cat.x + DIRECTION.x, cat.y + DIRECTION.y); }
+
+      if (verb === 'after' || verb === 'not-after') { currentTile = whatTile(cat.x - DIRECTION.x, cat.y - DIRECTION.y); }
+
+      if (verb === 'left' || verb === 'not-left') {
+        if (catDirection === 'south') { currentTile = whatTile(cat.x + 32, cat.y - 16); }
+
+        if (catDirection === 'west') { currentTile = whatTile(cat.x + 32, cat.y + 16); }
+
+        if (catDirection === 'north') { currentTile = whatTile(cat.x - 32, cat.y + 16); }
+
+        if (catDirection === 'east') { currentTile = whatTile(cat.x - 32, cat.y - 16); }
+      }
+
+      if (verb === 'right' || verb === 'not-right') {
+        if (catDirection === 'south') { currentTile = whatTile(cat.x - 32, cat.y + 16); }
+
+        if (catDirection === 'west') { currentTile = whatTile(cat.x - 32, cat.y - 16); }
+
+        if (catDirection === 'north') { currentTile = whatTile(cat.x + 32, cat.y - 16); }
+
+        if (catDirection === 'east') { currentTile = whatTile(cat.x + 32, cat.y + 16); }
+      }
+
+      // Si c'est une phrase affirmative :
+      if (!triggersObject[cnt].condition.negative) {
+        return (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
+      }
+      // Sinon, une phrase négative :
+      else {
+        return (currentTile.infos.tile !== complement && ((!currentTile.infos.object) || (currentTile.infos.object && currentTile.infos.object.texture !== complement)));
+      }
     }
 
-    if (verb === 'before') {
-      let currentTile = whatTile(cat.x + DIRECTION.x, cat.y + DIRECTION.y);
-      return (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
+    //  Trigger 'Pendant' :
+    else if (triggersObject[cnt].type === 'trigger-block-while') {
+      let duration = triggersObject[cnt].condition.duration;
+      if (triggerWhileCounter < duration) {
+        triggerWhileCounter++;
+        preventCntProgress = true;
+        return true;
+      } else {
+        triggerWhileCounter = 0;
+        preventCntProgress = false;
+        return false;
+      }
     }
 
-    if (verb === 'after') {
-      let currentTile = whatTile(cat.x - DIRECTION.x, cat.y - DIRECTION.y);
-      return (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
+    // Trigger 'Tant que' :
+    else if (triggersObject[cnt].type === 'trigger-block-until') {
+      let subject = triggersObject[cnt].condition.subject;
+      let verb = triggersObject[cnt].condition.verb;
+      let complement = triggersObject[cnt].condition.complement;
+      let currentTile;
+
+      if (verb === 'on' || verb === 'not-on') { currentTile = whatTile(cat.x, cat.y); }
+
+      if (verb === 'before' || verb === 'not-before') { currentTile = whatTile(cat.x + DIRECTION.x, cat.y + DIRECTION.y); }
+
+      if (verb === 'after' || verb === 'not-after') { currentTile = whatTile(cat.x - DIRECTION.x, cat.y - DIRECTION.y); }
+
+      if (verb === 'left' || verb === 'not-left') {
+        if (catDirection === 'south') { currentTile = whatTile(cat.x + 32, cat.y - 16); }
+
+        if (catDirection === 'west') { currentTile = whatTile(cat.x + 32, cat.y + 16); }
+
+        if (catDirection === 'north') { currentTile = whatTile(cat.x - 32, cat.y + 16); }
+
+        if (catDirection === 'east') { currentTile = whatTile(cat.x - 32, cat.y - 16); }
+      }
+
+      if (verb === 'right' || verb === 'not-right') {
+        if (catDirection === 'south') { currentTile = whatTile(cat.x - 32, cat.y + 16); }
+
+        if (catDirection === 'west') { currentTile = whatTile(cat.x - 32, cat.y - 16); }
+
+        if (catDirection === 'north') { currentTile = whatTile(cat.x + 32, cat.y - 16); }
+
+        if (catDirection === 'east') { currentTile = whatTile(cat.x + 32, cat.y + 16); }
+      }
+
+      // Si c'est une phrase affirmative :
+      if (!triggersObject[cnt].condition.negative) {
+        if (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement)) {
+          preventCntProgress = true;
+          return true;
+        } else {
+          preventCntProgress = false;
+          return false;
+        }
+      }
+      // Sinon, une phrase négative :
+      else {
+        if (currentTile.infos.tile !== complement && ((!currentTile.infos.object) || (currentTile.infos.object && currentTile.infos.object.texture !== complement))) {
+          preventCntProgress = true;
+          return true;
+        } else {
+          preventCntProgress = false;
+          return false;
+        }
+      }
+
     }
-    return true;
   }
 }
 
@@ -141,15 +238,15 @@ function checkDirection() {
       DIRECTION.x = 32;
       DIRECTION.y = 16;
       break;
-      case 'west':
+    case 'west':
       DIRECTION.x = -32;
       DIRECTION.y = 16;
       break;
-      case 'north':
+    case 'north':
       DIRECTION.x = -32;
       DIRECTION.y = -16;
       break;
-      case 'east':
+    case 'east':
       DIRECTION.x = 32;
       DIRECTION.y = -16;
       break;
@@ -158,7 +255,9 @@ function checkDirection() {
 }
 
 function updateCounter() {
-  cnt++;
+  if (!preventCntProgress) {
+    cnt++;
+  }
   if (cnt === 9) cnt = 0;
 }
 
