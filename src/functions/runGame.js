@@ -260,25 +260,26 @@ function updateCounter() {
 
 function moveForward() {
   cat.play();
-  
+
   if (isDeadly(cat.x, cat.y) > 0) {
-      console.log("creve");
-      let vid = document.getElementById("myVideo");
-      vid.style.display = 'block';
-      stopGame();
+    console.log("creve");
+    // let vid = document.getElementById("myVideo");
+    // vid.style.display = 'block';
+    alert("lose");
+    stopGame();
 
-      vid.play();
+    // vid.play();
 
-      setTimeout(function(){ vid.style.display = 'none'; }, 8000);
-      return;
+    // setTimeout(function(){ vid.style.display = 'none'; }, 8000);
+    return;
   }
 
   if (isEndGame(cat.x, cat.y) > 0) {
-      alert("Win");
-      stopGame();
-      return;
+    alert("Win");
+    stopGame();
+    return;
   }
-  
+
   switch (catDirection) {
     case 'south':
       if (isOnMap(cat.x + 32, cat.y + 16) > 0 && isAccessible(cat.x + 32, cat.y + 16) > 0) {
