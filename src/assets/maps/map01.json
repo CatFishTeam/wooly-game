@@ -2,15 +2,23 @@
   "id": null,
   "player": {
     "originTileId": 45,
-    "goalTileId": 67,
+    "goalTileId": 44,
     "originDirection": "south"
   },
   "tiles": {
-    "1": {
+    "0": {
       "firstLayer": {
         "texture" : "water",
         "accessible": true,
         "deadly": true
+      },
+      "secondLayer": null
+    },
+    "1": {
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
       },
       "secondLayer": null
     },
@@ -36,7 +44,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "5": {
       "firstLayer": {
@@ -44,11 +56,7 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "wall",
-        "accessible": false,
-        "deadly": false
-      }
+      "secondLayer": null
     },
     "6": {
       "firstLayer": {
@@ -72,7 +80,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "9": {
       "firstLayer": {
@@ -80,11 +92,7 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "wall",
-        "accessible": false,
-        "deadly": false
-      }
+      "secondLayer": null
     },
     "10": {
       "firstLayer": {
@@ -116,7 +124,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "14": {
       "firstLayer": {
@@ -124,11 +136,7 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "wall",
-        "accessible": false,
-        "deadly": false
-      }
+      "secondLayer": null
     },
     "15": {
       "firstLayer": {
@@ -144,7 +152,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "stone2",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "17": {
       "firstLayer": {
@@ -152,11 +164,7 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "stone2",
-        "accessible": false,
-        "deadly": false
-      }
+      "secondLayer": null
     },
     "18": {
       "firstLayer": {
@@ -172,7 +180,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "20": {
       "firstLayer": {
@@ -180,11 +192,7 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "wall",
-        "accessible": false,
-        "deadly": false
-      }
+      "secondLayer": null
     },
     "21": {
       "firstLayer": {
@@ -232,7 +240,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "27": {
       "firstLayer": {
@@ -240,11 +252,7 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "wall",
-        "accessible": false,
-        "deadly": false
-      }
+      "secondLayer": null
     },
     "28": {
       "firstLayer": {
@@ -300,7 +308,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "35": {
       "firstLayer": {
@@ -308,11 +320,7 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "wall",
-        "accessible": false,
-        "deadly": false
-      }
+      "secondLayer": null
     },
     "36": {
       "firstLayer": {
@@ -368,7 +376,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "wall",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "43": {
       "firstLayer": {
@@ -376,11 +388,7 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "wall",
-        "accessible": false,
-        "deadly": false
-      }
+      "secondLayer": null
     },
     "44": {
       "firstLayer": {
@@ -396,7 +404,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "tree",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "46": {
       "firstLayer": {
@@ -404,21 +416,9 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": {
-        "texture" : "tree",
-        "accessible": false,
-        "deadly": false
-      }
-    },
-    "47": {
-      "firstLayer": {
-        "texture" : "grass",
-        "accessible": true,
-        "deadly": false
-      },
       "secondLayer": null
     },
-    "48": {
+    "47": {
       "firstLayer": {
         "texture" : "grass",
         "accessible": true,
@@ -429,6 +429,14 @@
         "accessible": false,
         "deadly": false
       }
+    },
+    "48": {
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
+      "secondLayer": null
     },
     "49": {
       "firstLayer": {
@@ -444,21 +452,13 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
-    },
-    "51": {
-      "firstLayer": {
-        "texture" : "grass",
-        "accessible": true,
-        "deadly": false
-      },
       "secondLayer": {
         "texture" : "stone1",
         "accessible": false,
         "deadly": false
       }
     },
-    "52": {
+    "51": {
       "firstLayer": {
         "texture" : "grass",
         "accessible": true,
@@ -469,6 +469,14 @@
         "accessible": false,
         "deadly": false
       }
+    },
+    "52": {
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
+      "secondLayer": null
     },
     "53": {
       "firstLayer": {
@@ -504,17 +512,17 @@
     },
     "57": {
       "firstLayer": {
-        "texture" : "grass",
+        "texture" : "water",
         "accessible": true,
-        "deadly": false
+        "deadly": true
       },
       "secondLayer": null
     },
     "58": {
       "firstLayer": {
-        "texture" : "water",
+        "texture" : "grass",
         "accessible": true,
-        "deadly": true
+        "deadly": false
       },
       "secondLayer": null
     },
@@ -576,17 +584,17 @@
     },
     "66": {
       "firstLayer": {
-        "texture" : "grass",
+        "texture" : "water",
         "accessible": true,
-        "deadly": false
+        "deadly": true
       },
       "secondLayer": null
     },
     "67": {
       "firstLayer": {
-        "texture" : "water",
+        "texture" : "grass",
         "accessible": true,
-        "deadly": true
+        "deadly": false
       },
       "secondLayer": null
     },
@@ -598,6 +606,7 @@
       },
       "secondLayer": null
     },
+
     "69": {
       "firstLayer": {
         "texture" : "grass",
@@ -606,7 +615,6 @@
       },
       "secondLayer": null
     },
-
     "70": {
       "firstLayer": {
         "texture" : "grass",
@@ -641,9 +649,9 @@
     },
     "74": {
       "firstLayer": {
-        "texture" : "grass",
+        "texture" : "water",
         "accessible": true,
-        "deadly": false
+        "deadly": true
       },
       "secondLayer": null
     },
@@ -673,9 +681,9 @@
     },
     "78": {
       "firstLayer": {
-        "texture" : "water",
+        "texture" : "grass",
         "accessible": true,
-        "deadly": true
+        "deadly": false
       },
       "secondLayer": null
     },
@@ -697,9 +705,9 @@
     },
     "81": {
       "firstLayer": {
-        "texture" : "grass",
+        "texture" : "water",
         "accessible": true,
-        "deadly": false
+        "deadly": true
       },
       "secondLayer": null
     },
@@ -729,9 +737,9 @@
     },
     "85": {
       "firstLayer": {
-        "texture" : "water",
+        "texture" : "grass",
         "accessible": true,
-        "deadly": true
+        "deadly": false
       },
       "secondLayer": null
     },
@@ -749,7 +757,11 @@
         "accessible": true,
         "deadly": false
       },
-      "secondLayer": null
+      "secondLayer": {
+        "texture" : "tree",
+        "accessible": false,
+        "deadly": false
+      }
     },
     "88": {
       "firstLayer": {
@@ -764,18 +776,6 @@
       }
     },
     "89": {
-      "firstLayer": {
-        "texture" : "grass",
-        "accessible": true,
-        "deadly": false
-      },
-      "secondLayer": {
-        "texture" : "tree",
-        "accessible": false,
-        "deadly": false
-      }
-    },
-    "90": {
       "firstLayer": {
         "texture" : "grass",
         "accessible": true,

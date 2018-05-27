@@ -14,6 +14,7 @@ let cat = main.cat;
 let gameInstance = main.gameInstance;
 let animInstance = undefined;
 
+console.log(tiles);
 
 // Données JSON de la map
 const map = require('../assets/maps/map01');
@@ -47,8 +48,6 @@ module.exports = function runGame(action = 'run') {
     catDirection = map.player.originDirection;
 
     console.log("Game running");
-    // console.log(app.renderer.width);
-    // console.log(`${app.renderer.width} et ${app.renderer.height}`);
 
     if (!gameInstance) {
       requestAnimationFrame(readSteps);
@@ -302,8 +301,6 @@ function moveForward() {
 function moveTo(originCatX, originCatY, x, y) {
   let diffX = Math.abs(originCatX - x);
   let diffY = Math.abs(originCatY - y);
-  // console.log(cat.x + ' ' + x);
-  // console.log(cat.y + ' ' + y);
   if (cat.x < x) cat.x += (diffX/40);
   if (cat.x > x) cat.x -= (diffX/40);
   if (cat.y < y) cat.y += (diffY/40);
@@ -324,7 +321,7 @@ function whatTile(x, y) {
 }
 
 function isOnMap(x, y) {
-  return tiles.filter((tile, i) => JSON.stringify(tile.location) === JSON.stringify({id: (i+1), x: x, y: y})).length;
+  return tiles.filter((tile, i) => JSON.stringify(tile.location) === JSON.stringify({id: i, x: x, y: y})).length;
 }
 
 function isDeadly(x, y) {

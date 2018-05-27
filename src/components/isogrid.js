@@ -21,7 +21,7 @@ class IsoGrid {
     let x = 336;
     let initialX = x;
     let y = 96;
-    let tileId = 1;
+    let tileId = 0;
 
     // Dessine la partie supérieure de la map
     while (tilesLine <= 9) {
