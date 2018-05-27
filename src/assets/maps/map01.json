@@ -7,23 +7,43 @@
   },
   "tiles": {
     "1": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "2": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "3": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "4": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "5": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "wall",
         "accessible": false,
@@ -31,19 +51,35 @@
       }
     },
     "6": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "7": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "8": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "9": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "wall",
         "accessible": false,
@@ -51,23 +87,43 @@
       }
     },
     "10": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "11": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "12": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "13": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "14": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "wall",
         "accessible": false,
@@ -75,15 +131,27 @@
       }
     },
     "15": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "16": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "17": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "stone2",
         "accessible": false,
@@ -91,15 +159,27 @@
       }
     },
     "18": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "19": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "20": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "wall",
         "accessible": false,
@@ -107,31 +187,59 @@
       }
     },
     "21": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "22": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "23": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "24": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "25": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "26": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "27": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "wall",
         "accessible": false,
@@ -139,35 +247,67 @@
       }
     },
     "28": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "29": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "30": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "31": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "32": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "33": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "34": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "35": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "wall",
         "accessible": false,
@@ -175,35 +315,67 @@
       }
     },
     "36": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "37": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "38": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "39": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "40": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "41": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "42": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "43": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "wall",
         "accessible": false,
@@ -211,15 +383,27 @@
       }
     },
     "44": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "45": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "46": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "tree",
         "accessible": false,
@@ -227,11 +411,19 @@
       }
     },
     "47": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "48": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "bush",
         "accessible": false,
@@ -239,15 +431,27 @@
       }
     },
     "49": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "50": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "51": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "stone1",
         "accessible": false,
@@ -255,7 +459,11 @@
       }
     },
     "52": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "wall",
         "accessible": false,
@@ -263,152 +471,292 @@
       }
     },
     "53": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "54": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "55": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "56": {
-      "firstLayer": "water",
-      "secondLayer": {
-        "texture" : "wall",
-        "accessible": false,
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
         "deadly": false
-      }
+      },
+      "secondLayer": null
     },
     "57": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "58": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "59": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "60": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "61": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "62": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "63": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "64": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "65": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "66": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "67": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "68": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "69": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
 
     "70": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "71": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "72": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "73": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "74": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "75": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "76": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "77": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "78": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "79": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "80": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "81": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "82": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "83": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "84": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "85": {
-      "firstLayer": "water",
+      "firstLayer": {
+        "texture" : "water",
+        "accessible": true,
+        "deadly": true
+      },
       "secondLayer": null
     },
     "86": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "87": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": null
     },
     "88": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "tree",
         "accessible": false,
@@ -416,7 +764,11 @@
       }
     },
     "89": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "tree",
         "accessible": false,
@@ -424,7 +776,11 @@
       }
     },
     "90": {
-      "firstLayer": "grass",
+      "firstLayer": {
+        "texture" : "grass",
+        "accessible": true,
+        "deadly": false
+      },
       "secondLayer": {
         "texture" : "tree",
         "accessible": false,

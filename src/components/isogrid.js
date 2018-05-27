@@ -42,7 +42,7 @@ class IsoGrid {
 
         let floor = undefined;
 
-        floor = new MapTile(map.tiles[tileId].firstLayer, tileId, x, y, location, infos);
+        floor = new MapTile(map.tiles[tileId].firstLayer.texture, tileId, x, y, location, infos);
         floor.interactive = true;
         floor.hitArea = new PIXI.Polygon(new PIXI.Point(-360, 0), new PIXI.Point(0, -200), new PIXI.Point(360, 0), new PIXI.Point(0, 200));
         floor
@@ -88,7 +88,7 @@ class IsoGrid {
           object: map.tiles[tileId].secondLayer
         };
 
-        floor = new MapTile(map.tiles[tileId].firstLayer, tileId, x, y, location, infos);
+        floor = new MapTile(map.tiles[tileId].firstLayer.texture, tileId, x, y, location, infos);
         floor.interactive = true;
         floor.hitArea = new PIXI.Polygon(new PIXI.Point(-360, 0), new PIXI.Point(0, -200), new PIXI.Point(360, 0), new PIXI.Point(0, 200));
         floor

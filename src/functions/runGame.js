@@ -152,11 +152,11 @@ function checkTrigger() {
 
       // Si c'est une phrase affirmative :
       if (!triggersObject[cnt].condition.negative) {
-        return (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
+        return (currentTile.infos.tile.texture === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement));
       }
       // Sinon, une phrase négative :
       else {
-        return (currentTile.infos.tile !== complement && ((!currentTile.infos.object) || (currentTile.infos.object && currentTile.infos.object.texture !== complement)));
+        return (currentTile.infos.tile.texture !== complement && ((!currentTile.infos.object) || (currentTile.infos.object && currentTile.infos.object.texture !== complement)));
       }
     }
 
@@ -209,7 +209,7 @@ function checkTrigger() {
 
       // Si c'est une phrase affirmative :
       if (!triggersObject[cnt].condition.negative) {
-        if (currentTile.infos.tile === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement)) {
+        if (currentTile.infos.tile.texture === complement || (currentTile.infos.object && currentTile.infos.object.texture === complement)) {
           preventCntProgress = true;
           return true;
         } else {
@@ -219,7 +219,7 @@ function checkTrigger() {
       }
       // Sinon, une phrase négative :
       else {
-        if (currentTile.infos.tile !== complement && ((!currentTile.infos.object) || (currentTile.infos.object && currentTile.infos.object.texture !== complement))) {
+        if (currentTile.infos.tile.texture !== complement && ((!currentTile.infos.object) || (currentTile.infos.object && currentTile.infos.object.texture !== complement))) {
           preventCntProgress = true;
           return true;
         } else {
@@ -328,11 +328,11 @@ function isOnMap(x, y) {
 }
 
 function isDeadly(x, y) {
-  return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile === "water")).length;
+  return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile.deadly === true)).length;
 }
 
 function isAccessible(x, y) {
-  return tiles.filter((tile, i) => ((tile.infos.x === x && tile.infos.y === y) && (tile.infos.object === null || (tile.infos.object !== null && tile.infos.object.isAccessible)))).length;
+  return tiles.filter((tile, i) => ((tile.infos.x === x && tile.infos.y === y) && (tile.infos.object === null || (tile.infos.object !== null && tile.infos.object.accessible === true)))).length;
 }
 
 function turnLeft() {
