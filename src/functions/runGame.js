@@ -1,6 +1,7 @@
 /**
  * Ce module est appelé quand le joueur clique sur le bouton Play dans un niveau
  * */
+
 let main = require('../main');
 let grid = main.grid;
 let stage = main.stage;
@@ -15,7 +16,7 @@ let gameInstance = main.gameInstance;
 let animInstance = undefined;
 
 // Données JSON de la map
-const map = require('../assets/maps/map01');
+let map = main.map;
 
 let cnt = 0;
 let triggerWhileCounter = 0;
@@ -262,20 +263,42 @@ function moveForward() {
   cat.play();
 
   if (isDeadly(cat.x, cat.y) > 0) {
-    console.log("creve");
-    // let vid = document.getElementById("myVideo");
-    // vid.style.display = 'block';
     alert("lose");
     stopGame();
 
-    // vid.play();
-
-    // setTimeout(function(){ vid.style.display = 'none'; }, 8000);
     return;
   }
 
+  // TODO
+  // NIVEAU VALIDE DANS LE JEU : ON INSERE EN BDD UNE VICTOIRE DE PLUS SUR CE NIVEAU
+  // + LA SOLUTION DU JOUEUR EN JSON
   if (isEndGame(cat.x, cat.y) > 0) {
-    alert("Win");
+
+    let validateLevel = confirm("Bravo, vous avez réussi votre niveau ! Souhaitez-vous valider sa création ?");
+    if (validateLevel) {
+      // slug / id de la map
+      map.id = Math.random().toString(36).substr(2, 9);
+      // nom de la map
+      let mapName = prompt("Donnez un nom à votre niveau :");
+      // screenshot de la map
+      let renderTexture = PIXI.RenderTexture.create(app.renderer.width, app.renderer.height);
+      app.renderer.render(stage, renderTexture);
+      let canvas = app.renderer.extract.canvas(renderTexture);
+      // convertit le rendu en une image base64
+      let screenshot = canvas.toDataURL('image/png');
+
+      const user_id = 1;
+      const slug = map.id;
+      const name = mapName;
+      const data = JSON.stringify(map);
+      const best = 'notyet';
+      const played = 0;
+      const won = 0;
+      const created_at = new Date();
+      const updated_at = new Date();
+      post('/createLevel', { user_id, slug, name, data, best, played, won, created_at, updated_at, screenshot });
+    }
+
     stopGame();
     return;
   }
@@ -309,14 +332,20 @@ function moveForward() {
     default: break;
   }
 
-  if (isDeadly(cat.x, cat.y) > 0) {
-    console.log("creve")
-    stopGame();
-  }
+  // if (isDeadly(cat.x, cat.y) > 0) {
+  //   stopGame();
+  // }
 
 }
 
 function moveTo(originCatX, originCatY, x, y) {
+  // let catCurrentTile = whatTile(x, y);
+  // console.log(catCurrentTile.id);
+  // console.log(grid.container.children);
+  // let catIdInGrid = grid.container.children.map(child => child.name).indexOf('cat');
+  // console.log(catIdInGrid);
+  // reorderInGrid(grid.container.children, catIdInGrid, (catCurrentTile.id + 1));
+
   let diffX = Math.abs(originCatX - x);
   let diffY = Math.abs(originCatY - y);
   if (cat.x < x) cat.x += (diffX/40);
@@ -327,6 +356,7 @@ function moveTo(originCatX, originCatY, x, y) {
   if (Math.ceil(cat.x) === x && Math.ceil(cat.y) === y) {
     cat.x = Math.ceil(cat.x);
     cat.y = Math.ceil(cat.y);
+
     updateCounter();
     readSteps();
   } else {
@@ -335,7 +365,7 @@ function moveTo(originCatX, originCatY, x, y) {
 }
 
 function whatTile(x, y) {
-  return tiles.filter((tile, i) => (tile.location.x === x && tile.location.y === y))[0];
+  return tiles.filter((tile, i) => (_.inRange(tile.location.x, (x-2), (x+2)) && _.inRange(tile.location.y, (y-2), (y+2))))[0];
 }
 
 function isOnMap(x, y) {
@@ -351,7 +381,8 @@ function isAccessible(x, y) {
 }
 
 function isEndGame(x, y) {
-  return tiles.filter((tile, i) => (tile.infos.x === x && tile.infos.y === y && tile.infos.tile.end === true)).length;
+  let tile = whatTile(x, y);
+  return tile.id === map.player.goalTileId;
 }
 
 function turnLeft() {
@@ -390,6 +421,10 @@ function turnRight() {
   }
 }
 
+function reorderInGrid(arr, from, to) {
+  arr.splice(to, 0, arr.splice(from, 1)[0]);
+}
+
 function stopGame() {
   cat.stop();
   cancelAnimationFrame(gameInstance);
@@ -404,4 +439,17 @@ function stopGame() {
     trigger.tint = 0xffffff;
   });
   console.log('game stopped');
+}
+
+
+// Fonction d'envoi POST du level une fois validé
+function post(path, data) {
+  return window.fetch(path, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
 }

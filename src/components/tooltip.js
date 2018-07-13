@@ -1,6 +1,6 @@
 class Tooltip extends PIXI.Sprite {
 
-  constructor(texture = null, name = '', text = '', originX = 32, originY = 0) {
+  constructor(texture = null, name = '', text = '', originX = 0, originY = 0) {
     super(PIXI.loader.resources[texture].texture);
 
     this.alpha = 0;

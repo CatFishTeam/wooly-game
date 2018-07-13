@@ -24,6 +24,7 @@ const IsoGrid = require('./components/isogrid');
 const Step = require('./components/step');
 const Trigger = require('./components/trigger');
 const Sprite = require('./components/sprite');
+const Cat = require('./components/cat');
 
 // Functions
 
@@ -41,7 +42,8 @@ let app = new PIXI.Application({
   width: 960,
   height: 480,
   resolution: 1,
-  transparent: true
+  transparent: true,
+  roundPixels: true
 });
 
 // Ajouter le <canvas> du jeu dans la <div id='app'>
@@ -52,20 +54,19 @@ let container = new PIXI.Container();
 
 // Création du container du niveau
 let stage = new PIXI.Graphics();
-// stage.beginFill(0xb8e994);
 stage.beginFill(0xffffff);
 stage.drawRect(0, 0, 640, (app.renderer.height - 32));
 
-// Création du container du menu
+// Création du container du menu de jeu
 let menu = new PIXI.Graphics();
-menu.beginFill(0xfad390);
+menu.beginFill(0xffffff);
 menu.drawRect(0, 0, 320, (app.renderer.height - 32));
 menu.position.set(640, 0);
+
 
 // Ajout des sous-containers dans le container global
 container.addChild(stage);
 container.addChild(menu);
-
 
 
 /**
@@ -91,21 +92,29 @@ PIXI.loader
   .add("catanim2", "./src/assets/images/catanim2.png")
   .add("catanim3", "./src/assets/images/catanim3.png")
   .add("catanim4", "./src/assets/images/catanim4.png")
+  //  Wool ball
+  .add("wool", "./src/assets/images/wool.png")
   // JSON map data
   .add("map", "./src/assets/maps/map01.json")
   // Map textures (tiles & objets)
-  .add("grass", "./src/assets/images/grass.png")
-  .add("water", "./src/assets/images/water.png")
-  .add("tree", "./src/assets/images/tree.png")
-  .add("wall", "./src/assets/images/wall.png")
+  // // tiles
+  .add("grass", "./src/assets/images/test-grass.png")
+  .add("water", "./src/assets/images/test-water.png")
+  .add("stone", "./src/assets/images/stone.png")
+  .add("sand", "./src/assets/images/sand.png")
+  .add("ice", "./src/assets/images/ice.png")
+  // // objects
+  .add("tree", "./src/assets/images/test-tree.png")
+  .add("wall", "./src/assets/images/test-wall.png")
   .add("stone1", "./src/assets/images/stone1.png")
   .add("stone2", "./src/assets/images/stone2.png")
   .add("bush", "./src/assets/images/bush.png")
   .load((loader, resources) => {
 
+    /* here : connect to db to get level */
+
     const onHover = require('./functions/onHover');
     const onOut = require('./functions/onOut');
-
 
     // console.log(resources["map"].data.player);
 
@@ -115,15 +124,14 @@ PIXI.loader
       catframes.push(PIXI.Texture.fromFrame('./src/assets/images/catanim'+ i +'.png'));
     }
 
-    let cat = new PIXI.extras.AnimatedSprite(catframes);
-    cat.animationSpeed = 0.1;
+    // let cat = new PIXI.extras.AnimatedSprite(catframes);
+    // cat.animationSpeed = 0.1;
+    let cat = new Cat(catframes, 0.1);
 
     /**
      * La map
      */
-// Dessine la grille sur la map (voir ./components/grid.js)
-// let grid = new Grid(20, 14, 32, 32, stage);
-// grid.draw();
+    // Dessine la grille sur la map (voir ./components/grid.js)
 
     let grid = new IsoGrid(10, 14, 64, 32, stage);
 
@@ -131,27 +139,27 @@ PIXI.loader
     /**
      * Le menu
      */
-// Barre des actions possibles (dans le menu en bas)
+    // Barre des actions possibles (dans le menu en bas)
     let actions = new PIXI.Container();
     let triggerActions = new PIXI.Container();
     menu.addChild(actions);
     menu.addChild(triggerActions);
 
-// Actions
+    // Actions
     let forward;
     let turnleft;
     let turnright;
-    let wait;
-// Déclencheurs
+    // let wait;
+    // Déclencheurs
     let ifTrigger;
     let whileTrigger;
     let untilTrigger;
 
-// Zone des tooltips
-    let tooltips = new PIXI.Container();
-    menu.addChild(tooltips);
+    // Zone des tooltips
+    let gameTooltips = new PIXI.Container();
+    menu.addChild(gameTooltips);
 
-// Barre des steps que le chat fera (dans le menu en haut)
+    // Barre des steps que le chat fera (dans le menu en haut)
     let stepsArea = new PIXI.Container();
     let steps = new PIXI.Container();
     let triggers = new PIXI.Container();
@@ -162,7 +170,7 @@ PIXI.loader
     stepsArea.addChild(triggers);
 
     menu.addChild(stepsArea);
-// On crée 10 steps vides, 5 sur chaque ligne...
+    // On crée 10 steps vides, 5 sur chaque ligne...
     for (let y = 0; y < 2; y++) {
       for (let x = 0; x < 5; x++) {
         let step = new Step(x * 32, (y * 32) + 48, 32, 32, 'empty', steps);
@@ -172,7 +180,7 @@ PIXI.loader
         else
           trigger = new Trigger(x * 32, (y * 32) + 80, 'empty', triggers, 'trigger-bottom');
         trigger.tooltip = "Rien pour l'instant";
-        tooltips.addChild(trigger.tooltip);
+        gameTooltips.addChild(trigger.tooltip);
 
         step.draw();
 
@@ -181,7 +189,7 @@ PIXI.loader
       }
     }
 
-// ... puis on supprime la dernière, pour mettre le bouton PLAY à la place après
+    // ... puis on supprime la dernière, pour mettre le bouton PLAY à la place après
     steps.children.pop();
     triggers.children.pop();
     stepsObject.pop();
@@ -203,16 +211,24 @@ PIXI.loader
     cat.x = tiles[resources["map"].data.player.originTileId].infos.x;
     cat.y = tiles[resources["map"].data.player.originTileId].infos.y;
 
-    // On ajoute notre chat à notre niveau
+    // La pelote de laine
+    let wool = new Sprite('wool', 'wool');
+    wool.anchor.set(0.5, 0.75);
+    wool.x = tiles[resources["map"].data.player.goalTileId].infos.x;
+    wool.y = tiles[resources["map"].data.player.goalTileId].infos.y;
+
+    // On ajoute notre chat et la pelote à notre niveau
     stage.addChild(cat);
+    stage.addChild(wool);
 
     /**
-     * Menu
+     * GAME CODE
      */
 
     // On positionne les steps en haut et centré dans le menu
-    stepsArea.x = (stepsArea.parent.width / 2) - (stepsArea.width / 2);
-    stepsArea.y = 60;
+    // stepsArea.x = (stepsArea.parent.width / 2) - (stepsArea.width / 2);
+    stepsArea.x = 16;
+    stepsArea.y = 36;
 
 
     // et le bouton Play en bas à gauche des steps
@@ -227,34 +243,34 @@ PIXI.loader
       .on('pointerout', onOut);
     play.hasTooltip = true;
     play.tooltip = 'Exécute la série des actions en boucle';
-    tooltips.addChild(play.tooltip);
+    gameTooltips.addChild(play.tooltip);
 
     // Icones d'action
     forward = new Sprite('forward', 'forward');
     forward.x = 0;
     forward.hasTooltip = true;
     forward.tooltip = 'Fait avancer le chat d\'une case dans sa direction actuelle';
-    tooltips.addChild(forward.tooltip);
+    gameTooltips.addChild(forward.tooltip);
 
     turnleft = new Sprite('turnleft', 'turnleft', 32);
     turnleft.x = 32;
     turnleft.hasTooltip = true;
     turnleft.tooltip = 'Change la direction du chat de 90° dans le sens des aiguilles d\'une montre';
-    tooltips.addChild(turnleft.tooltip);
+    gameTooltips.addChild(turnleft.tooltip);
 
     turnright = new Sprite('turnright', 'turnright', 64);
     turnright.x = 64;
     turnright.hasTooltip = true;
     turnright.tooltip = 'Change la direction du chat de 90° dans le sens inverse des aiguilles d\'une montre';
-    tooltips.addChild(turnright.tooltip);
+    gameTooltips.addChild(turnright.tooltip);
 
-    wait = new Sprite('wait', 'wait', 96);
-    wait.x = 96;
-    wait.hasTooltip = true;
-    wait.tooltip = 'Attend (sert à rien pour l\'instant - ptet à virer)';
-    tooltips.addChild(wait.tooltip);
+    // wait = new Sprite('wait', 'wait', 96);
+    // wait.x = 96;
+    // wait.hasTooltip = true;
+    // wait.tooltip = 'Attend (sert à rien pour l\'instant - ptet à virer)';
+    // tooltips.addChild(wait.tooltip);
 
-    actions.addChild(forward, turnleft, turnright, wait);
+    actions.addChild(forward, turnleft, turnright);
 
     // Icones de déclencheurs
     ifTrigger = new Sprite('trigger-block-if', 'trigger-block-if');
@@ -263,7 +279,7 @@ PIXI.loader
     ifTrigger.type = 'trigger';
     ifTrigger.hasTooltip = true;
     ifTrigger.tooltip = '"Si" : Exécute l\'action si la condition est vraie';
-    tooltips.addChild(ifTrigger.tooltip);
+    gameTooltips.addChild(ifTrigger.tooltip);
 
     triggerActions.addChild(ifTrigger);
 
@@ -273,7 +289,7 @@ PIXI.loader
     whileTrigger.type = 'trigger';
     whileTrigger.hasTooltip = true;
     whileTrigger.tooltip = '"Pendant" : Exécute l\'action pendant un certain temps';
-    tooltips.addChild(whileTrigger.tooltip);
+    gameTooltips.addChild(whileTrigger.tooltip);
 
     triggerActions.addChild(whileTrigger);
 
@@ -283,32 +299,25 @@ PIXI.loader
     untilTrigger.type = 'trigger';
     untilTrigger.hasTooltip = true;
     untilTrigger.tooltip = '"Tant que" : Exécute l\'action tant que la condition est vraie';
-    tooltips.addChild(untilTrigger.tooltip);
+    gameTooltips.addChild(untilTrigger.tooltip);
 
     triggerActions.addChild(untilTrigger);
 
+
     // On positionne notre barre d'actions en bas et centré dans le menu,
     // et la barre des déclencheurs
-    actions.x = (actions.parent.width / 2) - (actions.width / 2);
-    actions.y = actions.parent.height - 160;
+    // actions.x = (actions.parent.width / 2) - (actions.width / 2);
+    actions.x = 32;
+    actions.y = actions.parent.height - 198;
 
-    triggerActions.x = (triggerActions.parent.width / 2) - (triggerActions.width / 2);
-    triggerActions.y = triggerActions.parent.height - 128;
+    // triggerActions.x = (triggerActions.parent.width / 2) - (triggerActions.width / 2);
+    triggerActions.x = 32;
+    triggerActions.y = triggerActions.parent.height - 160;
 
     // On positionne la zone où les tooltips s'afficheront
-    tooltips.x = 0;
-    tooltips.y = tooltips.parent.height - 96;
+    gameTooltips.x = 0;
+    gameTooltips.y = gameTooltips.parent.height - 64;
 
-
-    let mapText = new PIXI.Text('map');
-    mapText.x = 20;
-    mapText.y = stage.height;
-    stage.addChild(mapText);
-
-    let menuText = new PIXI.Text('menu');
-    menuText.x = 20;
-    menuText.y = menu.height;
-    menu.addChild(menuText);
 
     function checkActions() {
 
@@ -349,7 +358,7 @@ PIXI.loader
           .on('pointermove', onDragMove);
       }
 
-    //   Cases de déclencheurs
+      //   Cases de déclencheurs
       triggersObject.filter(triggerObject => {
         triggerObject.interactive = true;
         triggerObject.buttonMode = true;
@@ -358,8 +367,10 @@ PIXI.loader
 
     }
 
+
     module.exports = {
       app,
+      map,
       grid,
       stage,
       actions,
@@ -370,8 +381,9 @@ PIXI.loader
       triggers,
       stepsObject,
       triggersObject,
-      tooltips,
+      gameTooltips,
       cat,
+      wool,
       gameInstance
     };
 
@@ -385,13 +397,11 @@ PIXI.loader
       if (gameRunning && stepsObject.filter(step => step.type !== 'empty').length > 0) {
         runGame('run');
         play.changeSprite('pause');
-        logs.push('Ca marche !');
       }
       // Sinon, on ne lance pas le jeu, ou on le stoppe s'il était lancé
       else {
         runGame('stop');
         play.changeSprite('play');
-        logs.push('Ca s\'arrête !');
       }
       writeLogs();
     };
@@ -399,6 +409,46 @@ PIXI.loader
     // // Pour chacun des boutons d'action et déclencheurs, on les rend interactif pour pouvoir les cliquer,
     // // drag'n'drop, etc, et on associe ces events aux fonctions dans ./functions
     checkActions();
+
+    // Set map id
+    document.querySelector('.uniq').addEventListener('click', function () {
+      map.id = Math.random().toString(36).substr(2, 9);
+      console.log(map.id);
+      let renderTexture = PIXI.RenderTexture.create(app.renderer.width, app.renderer.height);
+      app.renderer.render(stage, renderTexture);
+      let canvas = app.renderer.extract.canvas(renderTexture);
+      let img = canvas.toDataURL('image/png');
+      // document.querySelector('img.screenshot').src = img;
+
+      // convert base64 to blob
+      fetch(img)
+        .then(res => res.blob())
+        .then(blob => {
+
+          // convert blob to base64
+          let reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = function() {
+            let base64data = reader.result;
+            document.querySelector('img.screenshot').src = base64data;
+          };
+
+        });
+
+    });
+
+
+    // Get JSON from map
+    document.querySelector('.getJson').addEventListener('click', function () {
+      let jsonInput = document.querySelector('.mapjson');
+      jsonInput.style.display = 'block';
+      jsonInput.value = JSON.stringify(map);
+      jsonInput.focus();
+      jsonInput.select();
+      document.execCommand("copy");
+      jsonInput.style.display = 'none';
+      alert("json de la map ajouté à ton clipboard mon srab sûr");
+    });
 
 
     // On lance la fonction loop qui se répètera à chaque frame

@@ -3,7 +3,6 @@ const MapObject = require('./mapobject');
 const map = require('../assets/maps/map01');
 const onHover = require('../functions/editor/onHover');
 const onOut = require('../functions/editor/onOut');
-const onClick = require('../functions/editor/onClick');
 
 
 class IsoGrid {
@@ -47,8 +46,7 @@ class IsoGrid {
         floor.hitArea = new PIXI.Polygon(new PIXI.Point(-360, 0), new PIXI.Point(0, -200), new PIXI.Point(360, 0), new PIXI.Point(0, 200));
         floor
           .on('pointerover', onHover)
-          .on('pointerout', onOut)
-          .on('click', onClick);
+          .on('pointerout', onOut);
 
         this.container.addChild(floor);
 
@@ -56,7 +54,9 @@ class IsoGrid {
           let objet = undefined;
 
           objet = new MapObject(map.tiles[tileId].secondLayer.texture, tileId, x, y, location, infos);
+          objet.alpha = 0.9;
           this.container.addChild(objet);
+          floor.object = objet;
         }
 
         x += 64;
@@ -93,8 +93,7 @@ class IsoGrid {
         floor.hitArea = new PIXI.Polygon(new PIXI.Point(-360, 0), new PIXI.Point(0, -200), new PIXI.Point(360, 0), new PIXI.Point(0, 200));
         floor
           .on('pointerover', onHover)
-          .on('pointerout', onOut)
-          .on('click', onClick);
+          .on('pointerout', onOut);
 
         this.container.addChild(floor);
 
@@ -102,7 +101,9 @@ class IsoGrid {
           let objet = undefined;
 
           objet = new MapObject(map.tiles[tileId].secondLayer.texture, tileId, x, y, location, infos);
+          objet.alpha = 0.9;
           this.container.addChild(objet);
+          floor.object = objet;
         }
 
         x += 64;
@@ -114,6 +115,8 @@ class IsoGrid {
       y += 16;
       tilesLine--;
     }
+
+
   }
 
   getWidth() {

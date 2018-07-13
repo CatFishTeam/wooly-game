@@ -9,13 +9,15 @@
 <div id="app"></div>
 <div id="logs"></div>
 <button class="uniq">Générer</button>
+<button class="switchMenu">Toggle menu/editor</button>
+<button class="getJson">Get JSON</button>
+<button class="testDb">Test DB</button>
 <div class="trigger-choice"></div>
 
+<textarea class="mapjson" style="display: none;"></textarea>
+
+
 <script src="dist/build.js"></script>
-<script>
-  document.querySelector('.uniq').addEventListener('click', function (e) {
-    console.log(Math.random().toString(36).substr(2, 9));
-  });
-</script>
+<script src="./app.js"></script>
 </body>
 </html>

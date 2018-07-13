@@ -3,7 +3,7 @@ const Sprite = require('../components/sprite');
 let main = require('../main');
 let actions = main.actions;
 let triggerActions = main.triggerActions;
-let tooltips = main.tooltips;
+let tooltips = main.gameTooltips;
 
 module.exports = function (event) {
   const onHover = require('./onHover');

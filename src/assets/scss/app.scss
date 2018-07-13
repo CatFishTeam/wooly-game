@@ -4,8 +4,11 @@ body {
 }
 
 #app {
+  display: flex;
+  justify-content: center;
+
   canvas {
-    border: 1px dashed gray;
+    //border: 1px dashed gray;
   }
 }
 

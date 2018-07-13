@@ -1,5 +1,10 @@
 module.exports = function onOut() {
-  this.tint = 0xffffff;
+  if (this.object) {
+    this.object.alpha = 0.9;
+  }
+  if (!this.highlight) {
+    this.tint = 0xffffff;
+  }
   if (this.hasTooltip) {
     this.tooltip.hide();
   }
