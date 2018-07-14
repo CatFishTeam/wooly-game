@@ -16,7 +16,6 @@ let _ = require('lodash');
 
 let logs = [];
 
-
 /**
  * Composants
  */
@@ -73,42 +72,42 @@ container.addChild(menu);
  * Chargement des sprites/images
  */
 PIXI.loader
-  .add("forward", "./src/assets/images/move.png")
-  .add("turnleft", "./src/assets/images/clockwise.png")
-  .add("turnright", "./src/assets/images/anticlockwise.png")
-  .add("wait", "./src/assets/images/wait.png")
-  .add("play", "./src/assets/images/play.png")
-  .add("pause", "./src/assets/images/pause.png")
-  .add("tooltip", "./src/assets/images/tooltip.png")
-  .add("trigger-top", "./src/assets/images/trigger-top.png")
-  .add("trigger-bottom", "./src/assets/images/trigger-bottom.png")
-  .add("trigger-block-if", "./src/assets/images/trigger-block-if.png")
-  .add("trigger-block-while", "./src/assets/images/trigger-block-while.png")
-  .add("trigger-block-until", "./src/assets/images/trigger-block-until.png")
-  .add("settrigger-top", "./src/assets/images/settrigger-top.png")
-  .add("settrigger-bottom", "./src/assets/images/settrigger-bottom.png")
+  .add("forward", "/src/assets/images/move.png")
+  .add("turnleft", "/src/assets/images/clockwise.png")
+  .add("turnright", "/src/assets/images/anticlockwise.png")
+  .add("wait", "/src/assets/images/wait.png")
+  .add("play", "/src/assets/images/play.png")
+  .add("pause", "/src/assets/images/pause.png")
+  .add("tooltip", "/src/assets/images/tooltip.png")
+  .add("trigger-top", "/src/assets/images/trigger-top.png")
+  .add("trigger-bottom", "/src/assets/images/trigger-bottom.png")
+  .add("trigger-block-if", "/src/assets/images/trigger-block-if.png")
+  .add("trigger-block-while", "/src/assets/images/trigger-block-while.png")
+  .add("trigger-block-until", "/src/assets/images/trigger-block-until.png")
+  .add("settrigger-top", "/src/assets/images/settrigger-top.png")
+  .add("settrigger-bottom", "/src/assets/images/settrigger-bottom.png")
   // Cat character sprites
-  .add("catanim1", "./src/assets/images/catanim1.png")
-  .add("catanim2", "./src/assets/images/catanim2.png")
-  .add("catanim3", "./src/assets/images/catanim3.png")
-  .add("catanim4", "./src/assets/images/catanim4.png")
+  .add("catanim1", "/src/assets/images/catanim1.png")
+  .add("catanim2", "/src/assets/images/catanim2.png")
+  .add("catanim3", "/src/assets/images/catanim3.png")
+  .add("catanim4", "/src/assets/images/catanim4.png")
   //  Wool ball
-  .add("wool", "./src/assets/images/wool.png")
+  .add("wool", "/src/assets/images/wool.png")
   // JSON map data
-  .add("map", "./src/assets/maps/map01.json")
+  .add("map", "/src/assets/maps/map01.json")
   // Map textures (tiles & objets)
   // // tiles
-  .add("grass", "./src/assets/images/test-grass.png")
-  .add("water", "./src/assets/images/test-water.png")
-  .add("stone", "./src/assets/images/stone.png")
-  .add("sand", "./src/assets/images/sand.png")
-  .add("ice", "./src/assets/images/ice.png")
+  .add("grass", "/src/assets/images/test-grass.png")
+  .add("water", "/src/assets/images/test-water.png")
+  .add("stone", "/src/assets/images/stone.png")
+  .add("sand", "/src/assets/images/sand.png")
+  .add("ice", "/src/assets/images/ice.png")
   // // objects
-  .add("tree", "./src/assets/images/test-tree.png")
-  .add("wall", "./src/assets/images/test-wall.png")
-  .add("stone1", "./src/assets/images/stone1.png")
-  .add("stone2", "./src/assets/images/stone2.png")
-  .add("bush", "./src/assets/images/bush.png")
+  .add("tree", "/src/assets/images/test-tree.png")
+  .add("wall", "/src/assets/images/test-wall.png")
+  .add("stone1", "/src/assets/images/stone1.png")
+  .add("stone2", "/src/assets/images/stone2.png")
+  .add("bush", "/src/assets/images/bush.png")
   .load((loader, resources) => {
 
     /* here : connect to db to get level */
@@ -121,7 +120,7 @@ PIXI.loader
     let catframes = [];
 
     for (let i = 1; i < 5; i++) {
-      catframes.push(PIXI.Texture.fromFrame('./src/assets/images/catanim'+ i +'.png'));
+      catframes.push(PIXI.Texture.fromFrame('/src/assets/images/catanim'+ i +'.png'));
     }
 
     // let cat = new PIXI.extras.AnimatedSprite(catframes);
@@ -410,47 +409,6 @@ PIXI.loader
     // // drag'n'drop, etc, et on associe ces events aux fonctions dans ./functions
     checkActions();
 
-    // Set map id
-    document.querySelector('.uniq').addEventListener('click', function () {
-      map.id = Math.random().toString(36).substr(2, 9);
-      console.log(map.id);
-      let renderTexture = PIXI.RenderTexture.create(app.renderer.width, app.renderer.height);
-      app.renderer.render(stage, renderTexture);
-      let canvas = app.renderer.extract.canvas(renderTexture);
-      let img = canvas.toDataURL('image/png');
-      // document.querySelector('img.screenshot').src = img;
-
-      // convert base64 to blob
-      fetch(img)
-        .then(res => res.blob())
-        .then(blob => {
-
-          // convert blob to base64
-          let reader = new FileReader();
-          reader.readAsDataURL(blob);
-          reader.onloadend = function() {
-            let base64data = reader.result;
-            document.querySelector('img.screenshot').src = base64data;
-          };
-
-        });
-
-    });
-
-
-    // Get JSON from map
-    document.querySelector('.getJson').addEventListener('click', function () {
-      let jsonInput = document.querySelector('.mapjson');
-      jsonInput.style.display = 'block';
-      jsonInput.value = JSON.stringify(map);
-      jsonInput.focus();
-      jsonInput.select();
-      document.execCommand("copy");
-      jsonInput.style.display = 'none';
-      alert("json de la map ajouté à ton clipboard mon srab sûr");
-    });
-
-
     // On lance la fonction loop qui se répètera à chaque frame
     loop();
 
@@ -470,15 +428,4 @@ PIXI.loader
  * Code JS, en dehors de PIXI / du <canvas>
  */
 
-// Affichage des logs (sous le canvas) :
-let logsDiv = document.querySelector('#logs');
-function writeLogs() {
-  logsDiv.innerHTML = '';
-  for (let log of logs) {
-    let logHtml = document.createElement('div');
-    logHtml.setAttribute('class', 'log');
-    logHtml.innerHTML = `<div>${log}</div>`;
-    logsDiv.appendChild(logHtml);
-  }
-}
 
