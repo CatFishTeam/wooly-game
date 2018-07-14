@@ -3,32 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no" />
-  <title>wooly-game</title>
+  <title>Wooly</title>
 </head>
 <body>
+
+<header>
+  <div class="header">
+    <div class="logo">
+      <img src="/src/assets/images/cat.svg" alt="Logo Wooly">
+    </div>
+    <h1 class="sitetitle"><a href="//wooly.cat">Wooly</a></h1>
+  </div>
+</header>
+<nav>
+  <div id="menu">
+    <ul>
+      <li class="rules"><a href="//wooly.cat/tutorial">Règles du jeu</a></li>
+      <li class="account"><a href="//wooly.cat/account">Mon compte</a></li>
+      <li class="play"><a href="//wooly.cat/levels">Jouer</a></li>
+      <li class="editor"><a href="//editor.wooly.cat">Éditeur</a></li>
+    </ul>
+  </div>
+  <div class="greenline"></div>
+</nav>
+
 <div id="app"></div>
 <div id="logs"></div>
 <div class="trigger-choice"></div>
 
-<textarea class="mapjson" style="display: none;"></textarea>
-
-
 <script src="/dist/build.js"></script>
 <script src="/app.js"></script>
-
-<script>
-  let slug = "rray01u6k";
-  let level = get('/getLevel/' + slug);
-
-  function get(path) {
-    fetch(path)
-      .then(data => data.text())
-      .then((data) => {
-      console.log(data);
-      return data;
-    })
-  }
-</script>
 
 </body>
 </html>

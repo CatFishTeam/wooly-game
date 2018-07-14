@@ -1,17 +1,17 @@
 const MapTile = require('./maptile');
 const MapObject = require('./mapobject');
-const map = require('../assets/maps/map01');
 const onHover = require('../functions/editor/onHover');
 const onOut = require('../functions/editor/onOut');
 
 
 class IsoGrid {
-  constructor(horizontalTiles, verticalTiles, tileWidth, tileHeight, container) {
+  constructor(horizontalTiles, verticalTiles, tileWidth, tileHeight, container, map) {
     this.horizontalTiles = horizontalTiles;
     this.verticalTiles = verticalTiles;
     this.tileWidth = tileWidth;
     this.tileHeight = tileHeight;
     this.container = container;
+    this.map = map;
   }
 
   draw() {
@@ -35,13 +35,13 @@ class IsoGrid {
           id: tileId,
           x: x,
           y: y,
-          tile: map.tiles[tileId].firstLayer,
-          object: map.tiles[tileId].secondLayer
+          tile: this.map.tiles[tileId].firstLayer,
+          object: this.map.tiles[tileId].secondLayer
         };
 
         let floor = undefined;
 
-        floor = new MapTile(map.tiles[tileId].firstLayer.texture, tileId, x, y, location, infos);
+        floor = new MapTile(this.map.tiles[tileId].firstLayer.texture, tileId, x, y, location, infos);
         floor.interactive = true;
         floor.hitArea = new PIXI.Polygon(new PIXI.Point(-360, 0), new PIXI.Point(0, -200), new PIXI.Point(360, 0), new PIXI.Point(0, 200));
         floor
@@ -50,10 +50,10 @@ class IsoGrid {
 
         this.container.addChild(floor);
 
-        if (map.tiles[tileId].secondLayer !== null) {
+        if (this.map.tiles[tileId].secondLayer !== null) {
           let objet = undefined;
 
-          objet = new MapObject(map.tiles[tileId].secondLayer.texture, tileId, x, y, location, infos);
+          objet = new MapObject(this.map.tiles[tileId].secondLayer.texture, tileId, x, y, location, infos);
           objet.alpha = 0.9;
           this.container.addChild(objet);
           floor.object = objet;
@@ -84,11 +84,11 @@ class IsoGrid {
           id: tileId,
           x: x,
           y: y,
-          tile: map.tiles[tileId].firstLayer,
-          object: map.tiles[tileId].secondLayer
+          tile: this.map.tiles[tileId].firstLayer,
+          object: this.map.tiles[tileId].secondLayer
         };
 
-        floor = new MapTile(map.tiles[tileId].firstLayer.texture, tileId, x, y, location, infos);
+        floor = new MapTile(this.map.tiles[tileId].firstLayer.texture, tileId, x, y, location, infos);
         floor.interactive = true;
         floor.hitArea = new PIXI.Polygon(new PIXI.Point(-360, 0), new PIXI.Point(0, -200), new PIXI.Point(360, 0), new PIXI.Point(0, 200));
         floor
@@ -97,10 +97,10 @@ class IsoGrid {
 
         this.container.addChild(floor);
 
-        if (map.tiles[tileId].secondLayer !== null) {
+        if (this.map.tiles[tileId].secondLayer !== null) {
           let objet = undefined;
 
-          objet = new MapObject(map.tiles[tileId].secondLayer.texture, tileId, x, y, location, infos);
+          objet = new MapObject(this.map.tiles[tileId].secondLayer.texture, tileId, x, y, location, infos);
           objet.alpha = 0.9;
           this.container.addChild(objet);
           floor.object = objet;

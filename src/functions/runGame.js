@@ -46,8 +46,6 @@ module.exports = function runGame(action = 'run') {
     preventCntProgress = false;
     catDirection = map.player.originDirection;
 
-    console.log("Game running");
-
     if (!gameInstance) {
       requestAnimationFrame(readSteps);
     }
@@ -339,12 +337,12 @@ function moveForward() {
 }
 
 function moveTo(originCatX, originCatY, x, y) {
-  // let catCurrentTile = whatTile(x, y);
-  // console.log(catCurrentTile.id);
-  // console.log(grid.container.children);
-  // let catIdInGrid = grid.container.children.map(child => child.name).indexOf('cat');
-  // console.log(catIdInGrid);
-  // reorderInGrid(grid.container.children, catIdInGrid, (catCurrentTile.id + 1));
+  let catCurrentTile = whatTile(x, y);
+  console.log(catCurrentTile.id);
+  console.log(grid.container.children);
+  let catIdInGrid = grid.container.children.map(child => child.name).indexOf('cat');
+  console.log(catIdInGrid);
+  reorderInGrid(grid.container.children, catIdInGrid, (catCurrentTile.id + 1));
 
   let diffX = Math.abs(originCatX - x);
   let diffY = Math.abs(originCatY - y);
@@ -438,7 +436,6 @@ function stopGame() {
   triggers.children.filter(trigger => {
     trigger.tint = 0xffffff;
   });
-  console.log('game stopped');
 }
 
 

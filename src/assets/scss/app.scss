@@ -1,7 +1,74 @@
 body {
   margin: 0;
   padding: 0;
+  font-size: 16px;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Avenir Next', sans-serif;
+  color: #4A4A4A;
+}
+
+header {
+  padding: 2% 12% 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 68px;
+}
+
+h1.sitetitle {
+  font-size: 38px;
+  margin-left: 30px;
+}
+
+h1 a {
+  text-decoration: none;
+  color: #AAD77B;
+}
+
+nav {
+  padding: 0 12%;
+  position: relative;
+}
+
+#menu {
+  margin: 20px 0;
+}
+
+#menu ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#menu ul li {
+  list-style-type: none;
+}
+
+#menu ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #4A4A4A;
+}
+
+.greenline {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid  #AAD77B;
+}
+
 
 #app {
   display: flex;
@@ -22,14 +89,30 @@ body {
 .trigger-choice {
   position: absolute;
   visibility: hidden;
-  width: 400px;
-  height: 200px;
-  border: 2px solid #f6b93b;
-  border-radius: 5px;
-  background: #2f3542;
+  width: 450px;
+  height: 90px;
+  border: 2px solid #aad77b;
+  border-radius: 20px;
+  background: #fff;
   padding: 10px 15px;
-  left: 40%;
-  top: 70%;
-  transform: translate(-50%, -50%);
-  color: #fff;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%,-50%);
+  color: #333;
+  box-shadow: 0 5px 40px 5px rgba(0,0,0,.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  #validTrigger {
+    border: 0;
+    padding: 5px 12px;
+    margin-left: 8px;
+    background: #aad77b;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
 }
