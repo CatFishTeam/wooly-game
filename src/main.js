@@ -27,8 +27,15 @@ let data = get('/getLevel/' + slug)
     let level = JSON.parse(data)[0];
     console.log(level);
     if (!level) {
-      document.querySelector('#logs').innerHTML =
-      `<div class="error">Le niveau est introuvable</div>`;
+      document.querySelector('.alerts').innerHTML =
+      `Le niveau est introuvable`;
+      document.querySelector('.alerts').style.visibility = 'visible';
+    } else {
+      post('/updatePlayed', { id: level.id, played: (level.played + 1)}).then(data => {
+        if (data.status === 200) {
+          console.log(data);
+        }
+      });
     }
     const map = JSON.parse(level.data);
     console.log(map);
@@ -368,6 +375,7 @@ let data = get('/getLevel/' + slug)
         module.exports = {
           app,
           map,
+          level,
           grid,
           stage,
           actions,
@@ -428,4 +436,15 @@ let data = get('/getLevel/' + slug)
 function get(path) {
   return fetch(path)
     .then(data => data.text())
+}
+
+function post(path, data) {
+  return window.fetch(path, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
 }

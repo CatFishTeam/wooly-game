@@ -47,8 +47,10 @@ module.exports = function onClick() {
             <option value="grass" data-type="tile" data-text="de l'herbe">de l'herbe</option>
             <option value="water" data-type="tile" data-text="de l'eau">de l'eau</option>
             <option value="sand" data-type="tile" data-text="du sable">du sable</option>
+            <option value="ice" data-type="tile" data-text="de la glace">de la glace</option>
+            <option value="stone" data-type="tile" data-text="de la pierre">de la pierre</option>
             <option value="wall" data-type="object" data-text="un mur">un mur</option>
-            <option value="rock" data-type="object" data-text="une pierre">une pierre</option>
+            <option value="rock" data-type="object" data-text="une pierre">un rocher</option>
             <option value="bush" data-type="object" data-text="un buisson">un buisson</option>
             <option value="tree" data-type="object" data-text="un arbre">un arbre</option>
           </select>
@@ -102,8 +104,10 @@ module.exports = function onClick() {
             <option value="grass" data-type="tile" data-text="de l'herbe">de l'herbe</option>
             <option value="water" data-type="tile" data-text="de l'eau">de l'eau</option>
             <option value="sand" data-type="tile" data-text="du sable">du sable</option>
+            <option value="ice" data-type="tile" data-text="de la glace">de la glace</option>
+            <option value="stone" data-type="tile" data-text="de la pierre">de la pierre</option>
             <option value="wall" data-type="object" data-text="un mur">un mur</option>
-            <option value="rock" data-type="object" data-text="une pierre">une pierre</option>
+            <option value="rock" data-type="object" data-text="une pierre">un rocher</option>
             <option value="bush" data-type="object" data-text="un buisson">un buisson</option>
             <option value="tree" data-type="object" data-text="un arbre">un arbre</option>
           </select>

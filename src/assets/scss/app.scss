@@ -1,3 +1,7 @@
+/* Imports */
+@import "~bootstrap/scss/bootstrap";
+
+
 body {
   margin: 0;
   padding: 0;
@@ -28,37 +32,44 @@ header {
 h1.sitetitle {
   font-size: 38px;
   margin-left: 30px;
+  font-weight: 600;
 }
 
 h1 a {
   text-decoration: none;
   color: #AAD77B;
+
+  &:hover {
+    text-decoration: none;
+    color: #AAD77B;
+  }
 }
 
 nav {
-  padding: 0 12%;
+  padding: 0 12% !important;
   position: relative;
+}
+
+.navbar {
+  background: #549c64;
 }
 
 #menu {
   margin: 20px 0;
 }
-
 #menu ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 #menu ul li {
   list-style-type: none;
 }
-
-#menu ul li a {
+#menu ul li a:not(.dropdown-item) {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 500;
-  color: #4A4A4A;
+  color: #fff;
 }
 
 .greenline {
@@ -66,8 +77,9 @@ nav {
   width: 100%;
   bottom: 0;
   left: 0;
-  border-bottom: 1px solid  #AAD77B;
+  border-bottom: 1px solid #AAD77B;
 }
+
 
 
 #app {
@@ -86,12 +98,14 @@ nav {
   display: none;
 }
 
-.trigger-choice {
+
+.trigger-choice, .alerts {
   position: absolute;
   visibility: hidden;
   width: 450px;
   height: 90px;
-  border: 2px solid #aad77b;
+  border: 2px solid;
+  text-align: center;
   border-radius: 20px;
   background: #fff;
   padding: 10px 15px;
@@ -115,4 +129,12 @@ nav {
     font-weight: 500;
     letter-spacing: 0.5px;
   }
+}
+
+.trigger-choice {
+  border-color: #aad77b;
+}
+
+.alerts {
+  border-color: #ee5253;
 }

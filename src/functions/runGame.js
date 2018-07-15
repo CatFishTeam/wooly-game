@@ -17,6 +17,7 @@ let animInstance = undefined;
 
 // Données JSON de la map
 let map = main.map;
+let level = main.level;
 
 let cnt = 0;
 let triggerWhileCounter = 0;
@@ -261,41 +262,42 @@ function moveForward() {
   cat.play();
 
   if (isDeadly(cat.x, cat.y) > 0) {
-    alert("lose");
+
+    let alerts = document.querySelector('.alerts');
+    alerts.style.borderColor = '#ee5253';
+    alerts.innerHTML = "<i class='fas fa-times'></i>Perdu !<br>" +
+      "Vous êtes tombé dans l'eau, mais vous pouvez réessayer.";
+    alerts.style.visibility = 'visible';
+
+    let closeAlert = document.querySelector('.alerts i');
+    closeAlert.addEventListener('click', function (e) {
+      alerts.style.visibility = 'hidden';
+    });
+
     stopGame();
 
     return;
   }
 
-  // TODO
   // NIVEAU VALIDE DANS LE JEU : ON INSERE EN BDD UNE VICTOIRE DE PLUS SUR CE NIVEAU
-  // + LA SOLUTION DU JOUEUR EN JSON
   if (isEndGame(cat.x, cat.y) > 0) {
 
-    let validateLevel = confirm("Bravo, vous avez réussi votre niveau ! Souhaitez-vous valider sa création ?");
-    if (validateLevel) {
-      // slug / id de la map
-      map.id = Math.random().toString(36).substr(2, 9);
-      // nom de la map
-      let mapName = prompt("Donnez un nom à votre niveau :");
-      // screenshot de la map
-      let renderTexture = PIXI.RenderTexture.create(app.renderer.width, app.renderer.height);
-      app.renderer.render(stage, renderTexture);
-      let canvas = app.renderer.extract.canvas(renderTexture);
-      // convertit le rendu en une image base64
-      let screenshot = canvas.toDataURL('image/png');
+    post('/updateWon', { id: level.id, won: (level.won + 1)}).then(data => {
+      if (data.status === 200) {
+        console.log(data);
+      }
+    });
 
-      const user_id = 1;
-      const slug = map.id;
-      const name = mapName;
-      const data = JSON.stringify(map);
-      const best = 'notyet';
-      const played = 0;
-      const won = 0;
-      const created_at = new Date();
-      const updated_at = new Date();
-      post('/createLevel', { user_id, slug, name, data, best, played, won, created_at, updated_at, screenshot });
-    }
+    let alerts = document.querySelector('.alerts');
+    alerts.style.borderColor = '#aad77b';
+    alerts.innerHTML = "<div><i class='fas fa-times'></i>Bravo !<br>" +
+      "Vous pouvez <a href='" + window.location.href + "'>rejouer ce niveau</a>, ou <a href='https://wooly.cat'>revenir à l'accueil</a>.</div>";
+    alerts.style.visibility = 'visible';
+
+    let closeAlert = document.querySelector('.alerts i');
+    closeAlert.addEventListener('click', function (e) {
+      alerts.style.visibility = 'hidden';
+    });
 
     stopGame();
     return;
@@ -330,9 +332,6 @@ function moveForward() {
     default: break;
   }
 
-  // if (isDeadly(cat.x, cat.y) > 0) {
-  //   stopGame();
-  // }
 
 }
 
@@ -439,7 +438,6 @@ function stopGame() {
 }
 
 
-// Fonction d'envoi POST du level une fois validé
 function post(path, data) {
   return window.fetch(path, {
     method: 'POST',

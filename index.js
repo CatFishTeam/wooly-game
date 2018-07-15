@@ -15,6 +15,22 @@ app.get('/getLevel/:slug', (req, res) => {
       res.send(level)
     });
 });
+app.post('/updatePlayed', (req, res) => {
+  store
+    .updatePlayed({
+      id: req.body.id,
+      played: req.body.played
+    })
+    .then(() => res.sendStatus(200))
+});
+app.post('/updateWon', (req, res) => {
+  store
+    .updateWon({
+      id: req.body.id,
+      won: req.body.won
+    })
+    .then(() => res.sendStatus(200))
+});
 app.listen(7555, () => {
   console.log('Server running on http://localhost:7555')
 });
